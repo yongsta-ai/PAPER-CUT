@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PAPER-CUT Dashboard</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #111;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .header h1 {
+      font-size: 48px;
+      letter-spacing: 4px;
+      margin-bottom: 12px;
+    }
+
+    .header p {
+      color: #666;
+      font-size: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 28px;
+      text-decoration: none;
+      color: inherit;
+      transition: 0.25s ease;
+      border: 1px solid #e5e5e5;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    }
+
+    .card h2 {
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+
+    .card p {
+      color: #666;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #999;
+      font-size: 13px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="header">
+      <h1>PAPER-CUT</h1>
+      <p>Marketing & Strategy Dashboard</p>
+    </div>
+
+    <div class="grid">
+
+      <a class="card" href="./papercut_strategy.html">
+        <h2>📦 PAPER-CUT 전략</h2>
+        <p>
+          페이퍼컷 브랜드 전략 및 운영 방향 정리 문서
+        </p>
+      </a>
+
+      <a class="card" href="./naver_shopping_analysis.html">
+        <h2>🛒 네이버 쇼핑 분석</h2>
+        <p>
+          네이버 쇼핑 데이터 및 경쟁사 분석 리포트
+        </p>
+      </a>
+
+      <a class="card" href="./coupsng_analysis_report.html">
+        <h2>📊 쿠팡 분석 리포트</h2>
+        <p>
+          쿠팡 판매 데이터 및 운영 분석 자료
+        </p>
+      </a>
+
+      <a class="card" href="./coupsng_checklist.html">
+        <h2>✅ 쿠팡 체크리스트</h2>
+        <p>
+          상품 등록 및 운영 체크리스트 문서
+        </p>
+      </a>
+
+    </div>
+
+    <div class="footer">
+      © 2026 PAPER-CUT
+    </div>
+
+  </div>
+
+</body>
+</html>
