@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>페이퍼컷 | 쿠팡 즉시 수정 체크리스트</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{--bg:#06080f;--g:rgba(255,255,255,.042);--g2:rgba(255,255,255,.07);--rim:rgba(255,255,255,.08);--rim2:rgba(255,255,255,.18);--t1:#eef2ff;--t2:#9ba8c4;--t3:#4c587a;--lime:#c8f135;--cyan:#22d9f5;--ind:#818cf8;--rose:#f87171;--amber:#fbbf24;--mint:#34d399;--r:13px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Pretendard',system-ui,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+.aura{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);animation:od 22s ease-in-out infinite alternate;}
+.o1{width:650px;height:650px;background:radial-gradient(circle,rgba(248,113,113,.18),transparent 70%);top:-15%;right:-10%;animation-delay:0s;opacity:1;}
+.o2{width:500px;height:500px;background:radial-gradient(circle,rgba(200,241,53,.12),transparent 70%);bottom:-10%;left:-5%;animation-delay:-12s;opacity:1;}
+@keyframes od{0%{transform:translate(0,0) scale(1);}100%{transform:translate(25px,20px) scale(1.06);}}
+.wrap{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 28px 80px;}
+.glass{background:var(--g);backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);border:1px solid var(--rim);border-radius:var(--r);transition:border-color .2s,background .2s;}
+
+/* HEADER */
+.hdr{padding:52px 0 40px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;border-bottom:1px solid var(--rim);margin-bottom:36px;}
+.kick{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);margin-bottom:18px;}
+.pip{width:7px;height:7px;border-radius:50%;background:var(--rose);animation:pp 2s ease-in-out infinite;}
+@keyframes pp{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.3;transform:scale(.55);}}
+.htitle{font-size:clamp(24px,3.5vw,44px);font-weight:800;line-height:1.14;letter-spacing:-.035em;}
+.htitle .gr{background:linear-gradient(130deg,var(--rose) 0%,var(--amber) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hdesc{margin-top:10px;font-size:14px;color:var(--t2);line-height:1.7;max-width:520px;}
+
+/* PROGRESS */
+.prog-wrap{min-width:200px;}
+.prog-top{display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px;}
+.prog-l{color:var(--t3);font-weight:500;}
+.prog-p{color:var(--rose);font-weight:700;font-variant-numeric:tabular-nums;}
+.prog-track{height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--rose),var(--amber),var(--lime));border-radius:2px;transition:width .6s cubic-bezier(.4,0,.2,1);}
+.prog-sub{font-size:11px;color:var(--t3);margin-top:5px;font-variant-numeric:tabular-nums;}
+
+/* OVERALL PROGRESS */
+.ov-prog{padding:18px 22px;margin-bottom:24px;}
+.ov-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;}
+.ov-title{font-size:14px;font-weight:700;}
+.ov-pct{font-size:30px;font-weight:800;color:var(--lime);letter-spacing:-.04em;font-variant-numeric:tabular-nums;}
+.ov-bar{height:7px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden;margin-bottom:7px;}
+.ov-fill{height:100%;background:linear-gradient(90deg,var(--lime),var(--cyan));border-radius:4px;transition:width .65s cubic-bezier(.4,0,.2,1);}
+.ov-sub{font-size:11.5px;color:var(--t3);font-variant-numeric:tabular-nums;}
+
+/* SECTION STATS */
+.grid{display:grid;gap:12px;margin-bottom:12px;}
+.g4{grid-template-columns:repeat(4,1fr);}
+.g3{grid-template-columns:repeat(3,1fr);}
+.g2{grid-template-columns:1fr 1fr;}
+@media(max-width:860px){.g4,.g3{grid-template-columns:1fr 1fr;}}
+@media(max-width:520px){.g4,.g3,.g2{grid-template-columns:1fr;}}
+.stat{padding:18px 20px;display:flex;flex-direction:column;gap:5px;}
+.sl{font-size:10px;font-weight:700;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;}
+.sv{font-size:32px;font-weight:800;line-height:1;letter-spacing:-.045em;}
+.ss{font-size:11px;color:var(--t3);}
+
+/* CHECKLIST */
+.cls{margin-bottom:20px;}
+.cls-h{display:flex;align-items:center;justify-content:space-between;padding:12px 17px;border-radius:var(--r) var(--r) 0 0;border-bottom:none;border:1px solid;}
+.cls-l{display:flex;align-items:center;gap:10px;}
+.cls-icon{font-size:15px;}
+.cls-nm{font-size:13px;font-weight:700;}
+.cls-cnt{font-size:11px;font-weight:600;opacity:.7;font-variant-numeric:tabular-nums;}
+.cls-prog{font-size:11px;font-weight:700;opacity:.85;}
+
+.hr{background:rgba(248,113,113,.055);border-color:rgba(248,113,113,.22);color:var(--rose);}
+.ha{background:rgba(251,191,36,.055);border-color:rgba(251,191,36,.22);color:var(--amber);}
+.hc{background:rgba(34,217,245,.055);border-color:rgba(34,217,245,.22);color:var(--cyan);}
+.hi{background:rgba(129,140,248,.055);border-color:rgba(129,140,248,.22);color:var(--ind);}
+.hl{background:rgba(200,241,53,.055);border-color:rgba(200,241,53,.22);color:var(--lime);}
+.hm{background:rgba(52,211,153,.055);border-color:rgba(52,211,153,.22);color:var(--mint);}
+
+.cl-body{border:1px solid rgba(255,255,255,.07);border-top:none;border-radius:0 0 var(--r) var(--r);overflow:hidden;}
+.cl-item{display:grid;grid-template-columns:22px 1fr auto;gap:12px;align-items:start;padding:13px 16px;border-bottom:1px solid rgba(255,255,255,.038);cursor:pointer;user-select:none;transition:background .14s;}
+.cl-item:last-child{border-bottom:none;}
+.cl-item:hover{background:rgba(255,255,255,.022);}
+.cl-item.done{opacity:.5;}
+.cl-item.done .clt{text-decoration:line-through;color:var(--t3);}
+.cl-check{width:20px;height:20px;border-radius:6px;border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:1px;transition:all .16s;}
+.cl-item.done .cl-check{background:var(--mint);border-color:var(--mint);color:#000;font-weight:700;}
+.clt{font-size:13px;font-weight:600;color:var(--t1);line-height:1.52;margin-bottom:4px;}
+.cln{font-size:12px;color:var(--t3);line-height:1.62;}
+.clp{margin-top:6px;display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--cyan);background:rgba(34,217,245,.07);border:1px solid rgba(34,217,245,.16);padding:2px 8px;border-radius:5px;}
+.clp::before{content:'📍';}
+.cl-tags{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0;}
+.urg{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;}
+.un{background:rgba(248,113,113,.15);color:var(--rose);}
+.uw{background:rgba(251,191,36,.15);color:var(--amber);}
+.um{background:rgba(34,217,245,.1);color:var(--cyan);}
+.dur{font-size:10px;color:var(--t3);}
+
+/* IMPACT BADGE */
+.impact{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;}
+.imp-high{background:rgba(248,113,113,.15);color:var(--rose);}
+.imp-mid{background:rgba(251,191,36,.15);color:var(--amber);}
+.imp-low{background:rgba(52,211,153,.1);color:var(--mint);}
+
+/* ALERT */
+.alert{display:flex;gap:10px;align-items:flex-start;padding:13px 16px;border-radius:10px;font-size:13px;line-height:1.72;margin-bottom:14px;}
+.ai{background:rgba(34,217,245,.06);border:1px solid rgba(34,217,245,.18);color:#9ae8f5;}
+.aw{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.18);color:#f5d47a;}
+.ar{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.18);color:#fca5a5;}
+
+/* BEFORE/AFTER */
+.ba-wrap{background:rgba(255,255,255,.025);border:1px solid var(--rim);border-radius:8px;padding:12px;margin-bottom:8px;}
+.ba-before{font-size:11px;color:var(--rose);margin-bottom:4px;}
+.ba-after{font-size:11px;color:var(--lime);}
+.ba-text{font-size:12px;padding:6px 10px;border-radius:5px;line-height:1.6;}
+.ba-text.before{background:rgba(248,113,113,.08);color:var(--t2);}
+.ba-text.after{background:rgba(200,241,53,.07);color:var(--t1);}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px;}
+footer{margin-top:60px;padding:22px 0;border-top:1px solid var(--rim);display:flex;justify-content:space-between;font-size:11.5px;color:var(--t3);}
+footer strong{color:var(--t2);font-weight:700;}
+</style>
+</head>
+<body>
+<div class="aura"><div class="orb o1"></div><div class="orb o2"></div></div>
+<div class="wrap">
+
+<!-- HEADER -->
+<header class="hdr">
+  <div>
+    <div class="kick"><div class="pip"></div>Papercut · 쿠팡 즉시 수정 체크리스트</div>
+    <h1 class="htitle">쿠팡 상품 <span class="gr">즉시 수정</span><br>실행 체크리스트</h1>
+    <p class="hdesc">경쟁사 분석 결과 도출된 즉시 수정 가능 항목 · WING에서 바로 실행 가능</p>
+  </div>
+  <div style="text-align:right">
+    <div class="prog-wrap">
+      <div class="prog-top"><span class="prog-l">전체 완료율</span><span class="prog-p" id="gp">0%</span></div>
+      <div class="prog-track"><div class="prog-fill" id="gf" style="width:0%"></div></div>
+      <div class="prog-sub" id="gs">0 / 40 완료</div>
+    </div>
+  </div>
+</header>
+
+<!-- OVERALL PROGRESS -->
+<div class="ov-prog glass" style="border-top:1px solid rgba(200,241,53,.35)">
+  <div class="ov-head"><div class="ov-title">전체 체크리스트 완료율</div><div class="ov-pct" id="op">0%</div></div>
+  <div class="ov-bar"><div class="ov-fill" id="ob" style="width:0%"></div></div>
+  <div class="ov-sub" id="oc">0 / 40 완료</div>
+</div>
+
+<!-- SUMMARY STATS -->
+<div class="grid g4" style="margin-bottom:24px">
+  <div class="glass stat" style="border-top:1px solid rgba(248,113,113,.35)"><div class="sl">즉시 실행 항목</div><div class="sv" style="color:var(--rose)">17<span style="font-size:16px">개</span></div><div class="ss">오늘 당장 가능</div></div>
+  <div class="glass stat" style="border-top:1px solid rgba(251,191,36,.35)"><div class="sl">이번 주 완료</div><div class="sv" style="color:var(--amber)">13<span style="font-size:16px">개</span></div><div class="ss">7일 내 실행</div></div>
+  <div class="glass stat" style="border-top:1px solid rgba(34,217,245,.35)"><div class="sl">1개월 내</div><div class="sv" style="color:var(--cyan)">10<span style="font-size:16px">개</span></div><div class="ss">준비 후 실행</div></div>
+  <div class="glass stat" style="border-top:1px solid rgba(200,241,53,.35)"><div class="sl">영향 받는 상품</div><div class="sv" style="color:var(--lime)">22<span style="font-size:16px">개</span></div><div class="ss">전체 등록 상품</div></div>
+</div>
+
+<div class="alert ar"><span>🚨</span><div><strong>최우선:</strong> 상품명 "의류포장지 신발포장지" 삭제는 오늘 즉시 실행하세요. 카테고리 불일치로 노출 패널티를 받고 있을 가능성이 높습니다.</div></div>
+
+<!-- ═══ A. 상품명 수정 ═══ -->
+<div class="cls">
+  <div class="cls-h hr">
+    <div class="cls-l"><span class="cls-icon">🔴</span><span class="cls-nm">A. 상품명 즉시 수정 — 전 상품 적용</span></div>
+    <div style="display:flex;align-items:center;gap:10px"><span class="cls-cnt" id="ca">0/7</span></div>
+  </div>
+  <div class="cl-body">
+
+    <div class="cl-item" onclick="ck(this,'a')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">14926961633 / 14533797506 — "의류포장지 신발포장지" 즉시 삭제</div>
+        <div class="cln">30g 노루지 상품명 끝에 붙은 "의류포장지 신발포장지" 삭제. 유산지 카테고리에서 완전 무관한 키워드로 알고리즘 패널티 원인.</div>
+        <div class="ba-wrap">
+          <div class="ba-before">🚨 현재</div>
+          <div class="ba-text before">30g 노루지 1000장 식품지 식품용지 유산지 트레이종이 <span style="text-decoration:line-through;color:var(--rose)">의류포장지 신발포장지</span></div>
+          <div class="ba-after" style="margin-top:6px">✅ 수정 후</div>
+          <div class="ba-text after">[페이퍼컷] 노루지 30g 300×225mm 1000매 식품지 유산지 쟁반종이 트레이종이</div>
+        </div>
+        <div class="clp">WING → 상품관리 → 상품조회/수정 → 상품명 수정</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-high">영향 최대</span><span class="dur">10분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'a')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">35g 시리즈 상품명 — [페이퍼컷] 브랜드 앞에 추가</div>
+        <div class="cln">현재: "35g 노루지 600x450 1000매..." → 수정: "[페이퍼컷] 노루지 35g 600×450mm 1000매 식품지 유산지 쟁반종이 치킨종이"</div>
+        <div class="clp">WING → 상품관리 → 35g 시리즈 전체 수정 (9개)</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-high">영향 높음</span><span class="dur">30분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'a')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">30g 시리즈 상품명 — 규격 표기 통일 (×표시 정규화)</div>
+        <div class="cln">"600x450" → "600×450mm" 로 통일. mm 단위 명시. 필터 검색 정확도 향상.</div>
+        <div class="clp">WING → 상품관리 → 30g 시리즈 전체 수정</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-mid">영향 중</span><span class="dur">20분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'a')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">15786274575 / 14533797506 — 쿠팡 노출상품명 별도 확인 후 수정</div>
+        <div class="cln">등록상품명과 노출상품명이 다른 경우 있음. 노출상품명이 실제 검색에 사용되므로 반드시 확인.</div>
+        <div class="clp">WING → 상품관리 → 엑셀 다운로드 → 노출상품명 열 확인</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-mid">영향 중</span><span class="dur">15분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'a')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">스타핑 상품명 — 쿠팡 노출상품명 공식 구조 확인</div>
+        <div class="cln">노출상품명이 "스타핑 대용량 1kg..."으로 되어 있는지 확인. 쿠팡 가이드: 브랜드 + 제품명 + 상품군 구조.</div>
+        <div class="clp">WING → 상품관리 → 스타핑 상품 노출상품명 확인</div>
+      </div>
+      <div class="cl-tags"><span class="urg uw">이번 주</span><span class="impact imp-mid">영향 중</span><span class="dur">10분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'a')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">중복 키워드 정리 — "식품지 식품용지" 중복 제거</div>
+        <div class="cln">일부 상품명에 "식품지 식품용지"가 함께 있어 중복. 쿠팡 알고리즘이 스팸으로 인식할 수 있음. 하나만 유지.</div>
+        <div class="clp">WING → 상품관리 → 상품명 검토</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-mid">영향 중</span><span class="dur">15분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'a')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">엑셀 일괄 수정 후 WING 업로드로 전 상품 한 번에 처리</div>
+        <div class="cln">개별 수정보다 엑셀 다운로드 → 노출상품명 수정 → 업로드 방식이 훨씬 빠름. 22개 상품 동시 처리 가능.</div>
+        <div class="clp">WING → 상품조회/수정 → 엑셀 다운로드 → 수정 → 엑셀 업로드</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-high">영향 최대</span><span class="dur">1시간</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ B. 검색어(태그) 확장 ═══ -->
+<div class="cls">
+  <div class="cls-h ha">
+    <div class="cls-l"><span class="cls-icon">🟠</span><span class="cls-nm">B. 검색어(태그) 확장 — 40개 풀 등록</span></div>
+    <span class="cls-cnt" id="cb">0/6</span>
+  </div>
+  <div class="cl-body">
+
+    <div class="cl-item" onclick="ck(this,'b')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">14926961633 — 검색어 9개 → 40개로 즉시 확장</div>
+        <div class="cln">현재: 노루지,빵쟁반종이,빵종이,식품용지,식품지,유산지,쟁반깔지,쟁반종이,트레이종이 (9개만)</div>
+        <div class="cln" style="margin-top:4px">추가할 태그 31개: 기름종이,치킨포장지,치킨기름흡수지,튀김종이,종이호일,배달종이,김밥포장지,베이커리포장지,베이킹포장,샌드위치포장지,베이커리호일,식품포장지,페이퍼컷,노루지도매,업소용노루지,식당노루지,무코팅식품지,대량노루지,베이킹페이퍼,제과용지,포장지도매,제과포장지,육류포장지,1000매노루지,한쪽광택지,맞춤재단,치킨집종이,분식포장지,쟁반지,포장용지,식품용포장지</div>
+        <div class="clp">WING → 상품관리 → 엑셀 다운로드 → 검색어 열 수정</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-high">영향 최대</span><span class="dur">30분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'b')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">14533797506 — 검색어 13개 → 40개로 확장</div>
+        <div class="cln">현재: 깔지,노루지,습자지,식품용지,식품지,신발포장지,유산지,의류포장지,쟁반깔지,쟁반종이,쿠키깔지,트레이종이,포장지 (13개)<br>"신발포장지·의류포장지" 삭제하고 식품 관련 태그로 교체.</div>
+        <div class="clp">WING → 엑셀 수정 → 검색어 열</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-high">영향 최대</span><span class="dur">20분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'b')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">14516265049 (스타핑 100g) — 검색어 9개 → 40개 확장</div>
+        <div class="cln">현재: 선물포장,스타핑,완충재,완충제,완충지,초핑,쵸핑,택배포장,포장소품<br>추가: 완충지,구김지,크라프트완충지,사각형충진재,포장재,선물박스,포장상자,선물상자,포장용지,짚퍼완충재,포장해지,선물포장재,선물데코,포장꾸미기,크라프트지,화지,선물상자포장,인스타소품,촬영소품,배경지,쵸핑지,핑크포장지,포장재료,과일포장,박스포장재,선물포장용품,리본포장,포장스티커,포장데코소품,캔들포장지</div>
+        <div class="clp">WING → 엑셀 수정 → 스타핑 100g 검색어</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-high">영향 최대</span><span class="dur">20분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'b')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">35g 시리즈 검색어 20개 → 40개로 추가 확장</div>
+        <div class="cln">현재 20개는 양호하지만 40개가 최대치. 추가 여지 20개: 노루지도매,업소용노루지,식당노루지,맞춤재단,대량노루지,치킨집노루지,분식포장지,포장용지,트레이지,무코팅,한쪽광택지,광택지,식품안전,제과포장,베이킹지,쿠키포장,음식포장지,도시락포장지,일회용포장지,식품접촉지</div>
+        <div class="clp">WING → 엑셀 수정 → 35g 시리즈 검색어 (6개 상품)</div>
+      </div>
+      <div class="cl-tags"><span class="urg uw">이번 주</span><span class="impact imp-mid">영향 중</span><span class="dur">30분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'b')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">시즌 키워드 추가 (분기별 업데이트)</div>
+        <div class="cln">추석·설날 전: 명절포장지,선물포장지 추가 / 여름: 치킨포장,배달포장 강화 / 겨울: 포장지대량구매 등 시즌 키워드로 교체.</div>
+        <div class="clp">분기별 아이템스카우트에서 트렌드 키워드 확인</div>
+      </div>
+      <div class="cl-tags"><span class="urg um">분기별</span><span class="impact imp-mid">영향 중</span><span class="dur">30분/분기</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'b')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">엑셀 파일로 전 상품 검색어 일괄 업데이트</div>
+        <div class="cln">개별 수정보다 엑셀 방식이 효율적. 제공해드린 엑셀(Coupang_detailinfo_260510.xlsx)의 검색어 열 수정 후 WING 업로드.</div>
+        <div class="clp">WING → 상품조회/수정 → 엑셀 업로드</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-high">영향 최대</span><span class="dur">1시간</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ C. 검색옵션 입력 ═══ -->
+<div class="cls">
+  <div class="cls-h hc">
+    <div class="cls-l"><span class="cls-icon">🔵</span><span class="cls-nm">C. 검색옵션 전 상품 입력 — 필터 검색 노출 필수</span></div>
+    <span class="cls-cnt" id="cc">0/7</span>
+  </div>
+  <div class="cl-body">
+
+    <div class="cl-item" onclick="ck(this,'c')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">35g 신규 시리즈 6개 — 사이즈·코팅여부·매수 모두 공란 확인 후 입력</div>
+        <div class="cln">16165432686~16165410345 상품들: 사이즈(□), 유산지 코팅 여부(□), 유산지 형태(□), 내지매수(□) 전부 공란. 경쟁사는 모두 입력 완료.</div>
+        <div class="clp">WING → 엑셀 다운로드 → 검색옵션값 열 입력 → 업로드</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-high">영향 최대</span><span class="dur">40분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'c')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">유산지 코팅 여부 — 전 상품 "무코팅 한쪽광택지" 입력</div>
+        <div class="cln">쿠팡 필터에서 "코팅/논스틱" 선택 시 노출되려면 필수. 현재 일부 상품만 입력됨. 한쪽광택지 vs 양면지 정확히 구분해서 입력.</div>
+        <div class="clp">검색옵션유형: 유산지 코팅 여부 → 값: 무코팅 한쪽광택지</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-high">영향 높음</span><span class="dur">20분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'c')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">내지매수 전 상품 입력 — 1000매·2000매 정확히</div>
+        <div class="cln">35g 시리즈 1000매 → "1000개", 2000매 상품 → "2000개" 입력. 내지매수 필터 검색 노출에 필수.</div>
+        <div class="clp">검색옵션유형: 내지매수 (기본 단위: 개) → 값: 1000</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-mid">영향 중</span><span class="dur">15분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'c')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">유산지 형태 — 전 상품 "사각형" 입력</div>
+        <div class="cln">쿠팡 필터: 형태(사각형/분형/컵형/원형). 노루지는 전부 "사각형". 현재 공란인 상품 모두 입력.</div>
+        <div class="clp">검색옵션유형: 유산지 형태 → 값: 사각형</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-mid">영향 중</span><span class="dur">10분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'c')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">패턴/프린트 — 전 상품 "단색(무지)" 입력</div>
+        <div class="cln">일부 공란인 상품에 "단색(무지)" 입력. 패턴 필터 검색에서 제외되지 않으려면 필수.</div>
+        <div class="clp">검색옵션유형: 패턴/프린트 → 값: 단색(무지)</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-mid">영향 중</span><span class="dur">10분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'c')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">쿠팡 재질 — 전 상품 "종이" 입력</div>
+        <div class="cln">검색옵션 중 재질 항목. 현재 대부분 공란. "종이" 입력으로 소재 필터 검색 커버.</div>
+        <div class="clp">검색옵션유형: 쿠팡 재질 → 값: 종이</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-mid">영향 중</span><span class="dur">10분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'c')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">스타핑 상품 검색옵션 — 색상·총수량 입력</div>
+        <div class="cln">14516265049·14516259617 상품: 색상계열(화이트/베이지/크라프트), 총수량(1kg/100g) 입력. 현재 레드·블루·그린 옵션은 색상계열 공란.</div>
+        <div class="clp">WING → 스타핑 상품 검색옵션 색상계열 입력</div>
+      </div>
+      <div class="cl-tags"><span class="urg uw">이번 주</span><span class="impact imp-mid">영향 중</span><span class="dur">20분</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ D. 제조사 & 카테고리 ═══ -->
+<div class="cls">
+  <div class="cls-h hi">
+    <div class="cls-l"><span class="cls-icon">🟣</span><span class="cls-nm">D. 제조사 입력 & 카테고리 통일</span></div>
+    <span class="cls-cnt" id="cd">0/4</span>
+  </div>
+  <div class="cl-body">
+
+    <div class="cl-item" onclick="ck(this,'d')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">14926961633 제조사 "페이퍼컷" 입력</div>
+        <div class="cln">현재 제조사 필드 공란. 쿠팡 카탈로그 품질 점수에 영향. "페이퍼컷" 또는 실제 제조사명 입력.</div>
+        <div class="clp">WING → 엑셀 다운로드 → 제조사 열 → 페이퍼컷 입력</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-mid">영향 중</span><span class="dur">5분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'d')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">15786274575 / 14516265049 / 14516259617 제조사 입력</div>
+        <div class="cln">3개 상품 제조사 공란. 동일하게 "페이퍼컷" 입력. 엑셀로 한 번에 처리 가능.</div>
+        <div class="clp">WING → 엑셀 수정 → 제조사 열 일괄 입력</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-mid">영향 중</span><span class="dur">5분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'d')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">16165337011 카테고리 → [80647] 유산지로 변경</div>
+        <div class="cln">현재 [80646] 주방기름종이로 되어 있음. 다른 노루지 상품과 카테고리 불일치. [80647] 유산지로 통일하면 카테고리 집중도 향상.</div>
+        <div class="clp">WING → 상품 수정 → 카테고리 변경 (카테고리는 엑셀 수정 불가, 개별 수정 필요)</div>
+      </div>
+      <div class="cl-tags"><span class="urg uw">이번 주</span><span class="impact imp-mid">영향 중</span><span class="dur">10분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'d')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">30g 다옵션 상품(14926961633) — 옵션 구성 정리</div>
+        <div class="cln">사이즈 선택 옵션이 8개인데 상품명이 하나. 각 사이즈 옵션을 별도 상품으로 분리하면 SEO 효과 증폭. (중기 검토 필요)</div>
+        <div class="clp">중기 검토 사항 — 별도 상품 등록 여부 결정</div>
+      </div>
+      <div class="cl-tags"><span class="urg um">중기 검토</span><span class="impact imp-high">영향 높음</span><span class="dur">1~2시간</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ E. 썸네일 & 상세페이지 ═══ -->
+<div class="cls">
+  <div class="cls-h hl">
+    <div class="cls-l"><span class="cls-icon">🟢</span><span class="cls-nm">E. 썸네일 이미지 & 상세페이지 개선</span></div>
+    <span class="cls-cnt" id="ce">0/8</span>
+  </div>
+  <div class="cl-body">
+
+    <div class="cl-item" onclick="ck(this,'e')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">메인 썸네일 — 흰 배경 + 스택 이미지로 교체</div>
+        <div class="cln">올페이퍼 1위 스타일: 흰 배경에 노루지 10~20장 겹쳐 쌓기 + 우측 하단 규격/수량 텍스트. 현재 대비 클릭률 30~50% 향상 기대.</div>
+        <div class="clp">사진 촬영 → WING → 상품관리 → 이미지 교체</div>
+      </div>
+      <div class="cl-tags"><span class="urg uw">이번 주</span><span class="impact imp-high">영향 최대</span><span class="dur">촬영 포함 2시간</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'e')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">서브 이미지 — 실사용 장면 3장 추가 (치킨·빵·쟁반)</div>
+        <div class="cln">업소 실사용 이미지: 치킨 포장 장면, 빵 포장 장면, 쟁반 깔기 장면. 구매 결정에 가장 강력한 영향.</div>
+        <div class="clp">실사용 사진 촬영 → 상품 이미지 추가 (최대 10장)</div>
+      </div>
+      <div class="cl-tags"><span class="urg uw">이번 주</span><span class="impact imp-high">영향 높음</span><span class="dur">촬영 포함 3시간</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'e')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">규격별 용도 인포그래픽 이미지 제작</div>
+        <div class="cln">300×225 → 샌드위치·빵 / 400×300 → 치킨·튀김 / 600×450 → 쟁반. 사이즈 선택 가이드 이미지. 옵션 상품 이탈률 낮춤.</div>
+        <div class="clp">디자인 제작 → 상세페이지 상단 배치</div>
+      </div>
+      <div class="cl-tags"><span class="urg uw">이번 주</span><span class="impact imp-high">영향 높음</span><span class="dur">2~3시간</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'e')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">식품 안전 인증 강조 이미지</div>
+        <div class="cln">무코팅·식품 접촉 안전·원재료 명시 이미지. 업소 구매자가 가장 많이 묻는 질문에 선제 대응. 구매 전환율 향상.</div>
+        <div class="clp">인증 배지 이미지 제작 → 상세페이지 중단 배치</div>
+      </div>
+      <div class="cl-tags"><span class="urg um">1개월 내</span><span class="impact imp-mid">영향 중</span><span class="dur">2시간</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'e')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">Hero 배너 — 핵심 USP 3가지 강조</div>
+        <div class="cln">① 30g/35g 무코팅 식품용 ② 맞춤재단 다양한 규격 ③ 대량 1000매 업소용. 3초 안에 핵심 전달되도록.</div>
+        <div class="clp">상세페이지 최상단 배너 이미지 제작</div>
+      </div>
+      <div class="cl-tags"><span class="urg um">1개월 내</span><span class="impact imp-mid">영향 중</span><span class="dur">2시간</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'e')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">전체 규격 라인업 스펙표 이미지</div>
+        <div class="cln">크기 / 중량 / 수량 / 코팅여부 / 소재 정리표. 교차 구매 유도 효과. "다른 사이즈도 있어요" 링크 연결.</div>
+        <div class="clp">스펙표 이미지 제작 → 상세페이지 하단</div>
+      </div>
+      <div class="cl-tags"><span class="urg um">1개월 내</span><span class="impact imp-mid">영향 중</span><span class="dur">1시간</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'e')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">FAQ 5개 이미지 제작 — 반품 최소화</div>
+        <div class="cln">Q. 전자레인지 사용 가능한가요? / Q. 기름이 배어나오나요? / Q. 식품 접촉 안전한가요? / Q. 냄새가 나나요? / Q. 두께는 어느 정도인가요?</div>
+        <div class="clp">FAQ 이미지 제작 → 상세페이지 하단</div>
+      </div>
+      <div class="cl-tags"><span class="urg um">1개월 내</span><span class="impact imp-mid">영향 중</span><span class="dur">2시간</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'e')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">기름 흡수 성능 비교 실험 이미지</div>
+        <div class="cln">노루지를 깔고 튀김/치킨 올린 후 기름 흡수 과정 사진. 경쟁사 대비 성능 우위 시각화. 구매 설득력 극대화.</div>
+        <div class="clp">실험 촬영 → 상세페이지 중단</div>
+      </div>
+      <div class="cl-tags"><span class="urg um">1개월 내</span><span class="impact imp-mid">영향 중</span><span class="dur">촬영 포함 3시간</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ F. 리뷰 & 광고 ═══ -->
+<div class="cls">
+  <div class="cls-h hm">
+    <div class="cls-l"><span class="cls-icon">🟩</span><span class="cls-nm">F. 리뷰 확보 & 쿠팡 광고</span></div>
+    <span class="cls-cnt" id="cf">0/8</span>
+  </div>
+  <div class="cl-body">
+
+    <div class="cl-item" onclick="ck(this,'f')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">기존 구매자 리뷰 요청 메시지 발송 (쿠팡 메시지 기능)</div>
+        <div class="cln">쿠팡 WING → 고객관리 → 구매 고객에게 리뷰 요청 메시지. 직접 연락 불가하면 배송 박스 안 카드 동봉으로 대체.</div>
+        <div class="clp">WING → 고객관리 → 리뷰 요청 / 또는 포장 카드 제작</div>
+      </div>
+      <div class="cl-tags"><span class="urg un">지금 즉시</span><span class="impact imp-high">영향 최대</span><span class="dur">30분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'f')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">포장 안 리뷰 요청 카드 동봉</div>
+        <div class="cln">"쿠팡 리뷰 남겨주시면 다음 구매 시 할인 혜택" QR코드 포함 카드. 종이마을 1,934개 리뷰의 비결. 리뷰율 20~40% 향상.</div>
+        <div class="clp">카드 인쇄 제작 → 배송 박스 동봉</div>
+      </div>
+      <div class="cl-tags"><span class="urg uw">이번 주</span><span class="impact imp-high">영향 최대</span><span class="dur">카드 제작 1시간</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'f')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">쿠팡 광고(로켓 광고) 집행 검토</div>
+        <div class="cln">쿠팡 광고는 검색 결과 상단 노출 가능. 세부 키워드(노루지 도매, 업소용 노루지)부터 소액 집행해 효율 확인.</div>
+        <div class="clp">WING → 광고센터 → 쿠팡 광고 → 캠페인 만들기</div>
+      </div>
+      <div class="cl-tags"><span class="urg uw">이번 주</span><span class="impact imp-high">영향 높음</span><span class="dur">1시간</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'f')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">낮은 별점 리뷰 원인 파악 및 개선</div>
+        <div class="cln">현재 리뷰 내용 전체 분석 → 공통 불만 사항 파악 → 상품·포장·배송 개선. 별점 4.7 이상이 클릭률에 직결.</div>
+        <div class="clp">WING → 고객관리 → 리뷰 관리 → 별점별 필터</div>
+      </div>
+      <div class="cl-tags"><span class="urg uw">이번 주</span><span class="impact imp-mid">영향 중</span><span class="dur">1시간</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'f')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">로켓그로스 입점 신청 검토</div>
+        <div class="cln">상위 10개 중 8개가 로켓배송. 로켓그로스(위탁) 입점 없이 최상위 노출은 구조적으로 불리. WING에서 신청 가능.</div>
+        <div class="clp">WING → 로켓그로스 → 입점 신청 (재고 입고 필요)</div>
+      </div>
+      <div class="cl-tags"><span class="urg um">1개월 내</span><span class="impact imp-high">영향 최대</span><span class="dur">준비 포함 1~2주</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'f')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">쿠팡 광고 — 제외 키워드 설정</div>
+        <div class="cln">광고 집행 시 무관 검색어 제외: 롤케이크, 화장지, 냅킨, 티슈, 종이컵, 비닐봉지 등. 광고비 낭비 최소화.</div>
+        <div class="clp">쿠팡 광고센터 → 제외 키워드 관리</div>
+      </div>
+      <div class="cl-tags"><span class="urg uw">이번 주</span><span class="impact imp-mid">영향 중</span><span class="dur">15분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'f')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">쿠팡 찜 이벤트 설정 (찜 = 관심도 지표)</div>
+        <div class="cln">쿠팡 찜수도 알고리즘에 반영. 찜 조건 쿠폰 또는 SNS 홍보로 찜 수 증가 유도.</div>
+        <div class="clp">WING → 프로모션 → 쿠폰 설정</div>
+      </div>
+      <div class="cl-tags"><span class="urg uw">이번 주</span><span class="impact imp-mid">영향 중</span><span class="dur">30분</span></div>
+    </div>
+
+    <div class="cl-item" onclick="ck(this,'f')">
+      <div class="cl-check"></div>
+      <div>
+        <div class="clt">묶음 상품 구성 — 다양한 규격 세트</div>
+        <div class="cln">300×225 + 600×450 혼합 세트, 30g+35g 샘플 세트 등 신규 상품 등록. 신상품 최신성 알고리즘 혜택.</div>
+        <div class="clp">WING → 상품관리 → 상품 등록 → 묶음 구성</div>
+      </div>
+      <div class="cl-tags"><span class="urg um">1개월 내</span><span class="impact imp-mid">영향 중</span><span class="dur">1시간</span></div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <strong>페이퍼컷 × 쿠팡 즉시 수정 체크리스트</strong>
+  <span>2025.05.10 기준 · 경쟁사 분석 도출 항목</span>
+</footer>
+
+</div>
+
+<script>
+const MX={a:7,b:6,c:7,d:4,e:8,f:8};
+const CN={a:0,b:0,c:0,d:0,e:0,f:0};
+const TOT=Object.values(MX).reduce((s,v)=>s+v,0);
+function ck(el,sec){el.classList.toggle('done');const bx=el.querySelector('.cl-check');if(el.classList.contains('done')){bx.textContent='✓';CN[sec]++;}else{bx.textContent='';CN[sec]--;}sync(sec);}
+function sync(sec){const e=document.getElementById('c'+sec);if(e)e.textContent=CN[sec]+'/'+MX[sec];const d=Object.values(CN).reduce((s,v)=>s+v,0);const p=Math.round(d/TOT*100);
+document.getElementById('ob').style.width=p+'%';document.getElementById('op').textContent=p+'%';document.getElementById('oc').textContent=d+' / '+TOT+' 완료';
+document.getElementById('gf').style.width=p+'%';document.getElementById('gp').textContent=p+'%';document.getElementById('gs').textContent=d+' / '+TOT+' 완료';}
+</script>
+</body>
+</html>

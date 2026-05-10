@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>페이퍼컷 | 쿠팡 경쟁사 분석 리포트</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{--bg:#06080f;--g:rgba(255,255,255,.042);--g2:rgba(255,255,255,.07);--rim:rgba(255,255,255,.08);--rim2:rgba(255,255,255,.18);--t1:#eef2ff;--t2:#9ba8c4;--t3:#4c587a;--lime:#c8f135;--cyan:#22d9f5;--ind:#818cf8;--rose:#f87171;--amber:#fbbf24;--mint:#34d399;--pink:#e879f9;--r:13px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Pretendard',system-ui,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+.aura{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);animation:od 22s ease-in-out infinite alternate;}
+.o1{width:700px;height:700px;background:radial-gradient(circle,rgba(99,102,241,.2),transparent 70%);top:-20%;left:-15%;animation-delay:0s;opacity:1;}
+.o2{width:550px;height:550px;background:radial-gradient(circle,rgba(14,165,233,.16),transparent 70%);top:40%;right:-10%;animation-delay:-9s;opacity:1;}
+.o3{width:420px;height:420px;background:radial-gradient(circle,rgba(200,241,53,.1),transparent 70%);bottom:-8%;left:30%;animation-delay:-17s;opacity:1;}
+@keyframes od{0%{transform:translate(0,0) scale(1);}100%{transform:translate(30px,20px) scale(1.06);}}
+.wrap{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:0 28px 80px;}
+.glass{background:var(--g);backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);border:1px solid var(--rim);border-radius:var(--r);transition:border-color .2s,background .2s;}
+.glass:hover{border-color:var(--rim2);background:var(--g2);}
+.lt{border-top:1px solid rgba(200,241,53,.4)!important;}
+.ct{border-top:1px solid rgba(34,217,245,.4)!important;}
+.rt{border-top:1px solid rgba(248,113,113,.4)!important;}
+.at{border-top:1px solid rgba(251,191,36,.4)!important;}
+.it{border-top:1px solid rgba(129,140,248,.4)!important;}
+.mt{border-top:1px solid rgba(52,211,153,.4)!important;}
+.pt{border-top:1px solid rgba(232,121,249,.4)!important;}
+
+/* HEADER */
+.hdr{padding:56px 0 44px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;border-bottom:1px solid var(--rim);margin-bottom:40px;}
+.kick{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);margin-bottom:18px;}
+.pip{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pp 2.4s ease-in-out infinite;}
+@keyframes pp{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.3;transform:scale(.55);}}
+.htitle{font-size:clamp(26px,3.8vw,48px);font-weight:800;line-height:1.14;letter-spacing:-.035em;}
+.htitle .gr{background:linear-gradient(130deg,var(--lime) 20%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hdesc{margin-top:12px;font-size:14px;color:var(--t2);line-height:1.75;max-width:540px;}
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:4px 11px;border-radius:20px;margin-bottom:8px;}
+.b-lime{background:rgba(200,241,53,.1);border:1px solid rgba(200,241,53,.25);color:var(--lime);}
+.b-rose{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.25);color:var(--rose);}
+.b-amber{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25);color:var(--amber);}
+.b-cyan{background:rgba(34,217,245,.1);border:1px solid rgba(34,217,245,.25);color:var(--cyan);}
+.b-ind{background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.25);color:var(--ind);}
+.b-mint{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25);color:var(--mint);}
+
+/* TABS */
+.tabs{display:flex;gap:3px;background:rgba(255,255,255,.035);border:1px solid var(--rim);border-radius:13px;padding:4px;margin-bottom:32px;overflow-x:auto;}
+.tabs::-webkit-scrollbar{height:0;}
+.tb{flex:1;min-width:max-content;padding:9px 16px;background:transparent;border:none;font-family:'Pretendard',sans-serif;font-size:12.5px;font-weight:600;color:var(--t3);border-radius:10px;cursor:pointer;transition:all .18s;white-space:nowrap;}
+.tb:hover:not(.on){color:var(--t2);background:rgba(255,255,255,.04);}
+.tb.on{background:rgba(255,255,255,.09);color:var(--t1);box-shadow:0 1px 10px rgba(0,0,0,.3);}
+.pane{display:none;}
+.pane.on{display:block;animation:fi .28s cubic-bezier(.4,0,.2,1);}
+@keyframes fi{from{opacity:0;transform:translateY(9px);}to{opacity:1;transform:translateY(0);}}
+
+/* GRID */
+.grid{display:grid;gap:12px;margin-bottom:12px;}
+.g4{grid-template-columns:repeat(4,1fr);}
+.g3{grid-template-columns:repeat(3,1fr);}
+.g2{grid-template-columns:1fr 1fr;}
+.g21{grid-template-columns:2fr 1fr;}
+.g12{grid-template-columns:1fr 2fr;}
+@media(max-width:900px){.g4,.g3{grid-template-columns:1fr 1fr;}.g21,.g12{grid-template-columns:1fr;}}
+@media(max-width:540px){.g4,.g3,.g2,.g21,.g12{grid-template-columns:1fr;}}
+
+/* STAT */
+.stat{padding:20px 22px;display:flex;flex-direction:column;gap:6px;}
+.sl{font-size:10px;font-weight:700;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;}
+.sv{font-size:36px;font-weight:800;line-height:1;letter-spacing:-.045em;}
+.ss{font-size:11.5px;color:var(--t3);}
+.sv-lime{color:var(--lime);}.sv-cyan{color:var(--cyan);}.sv-rose{color:var(--rose);}.sv-amber{color:var(--amber);}.sv-mint{color:var(--mint);}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px;}
+.tbl th{padding:9px 13px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);border-bottom:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.02);}
+.tbl td{padding:10px 13px;border-bottom:1px solid rgba(255,255,255,.038);color:var(--t2);vertical-align:middle;}
+.tbl tr:hover td{background:rgba(255,255,255,.022);}
+.tbl tr:last-child td{border-bottom:none;}
+.rank-num{font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;}
+.rocket-yes{color:var(--lime);font-weight:700;}
+.rocket-no{color:var(--rose);font-weight:700;}
+.seller-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;}
+.sb-rocket{background:rgba(200,241,53,.12);color:var(--lime);border:1px solid rgba(200,241,53,.25);}
+.sb-seller{background:rgba(248,113,113,.1);color:var(--rose);border:1px solid rgba(248,113,113,.2);}
+.mono{font-family:monospace;font-size:11px;color:var(--amber);}
+.stars{color:var(--amber);font-size:13px;}
+
+/* BAR CHART */
+.bar-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.bar-row:last-child{border-bottom:none;}
+.bar-label{font-size:12px;color:var(--t1);font-weight:600;min-width:100px;}
+.bar-wrap{flex:1;}
+.bar-track{height:8px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
+.bar-val{font-size:12px;font-weight:700;min-width:52px;text-align:right;font-variant-numeric:tabular-nums;}
+.bar-sub{font-size:10px;color:var(--t3);margin-top:2px;}
+
+/* ALERT */
+.alert{display:flex;gap:10px;align-items:flex-start;padding:13px 16px;border-radius:10px;font-size:13px;line-height:1.72;margin-bottom:14px;}
+.ai{background:rgba(34,217,245,.06);border:1px solid rgba(34,217,245,.18);color:#9ae8f5;}
+.aw{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.18);color:#f5d47a;}
+.ag{background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.18);color:#7de8c4;}
+.ar{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.18);color:#fca5a5;}
+
+/* SCORE RING */
+.score-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
+.score-ring{position:relative;width:120px;height:120px;}
+.score-ring svg{transform:rotate(-90deg);}
+.score-ring circle{fill:none;stroke-width:10;stroke-linecap:round;}
+.score-bg{stroke:rgba(255,255,255,.07);}
+.score-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;}
+.score-n{font-size:28px;font-weight:800;letter-spacing:-.03em;}
+.score-l{font-size:10px;color:var(--t3);font-weight:600;letter-spacing:.08em;text-transform:uppercase;}
+
+/* COMPARISON MATRIX */
+.matrix-cell{padding:10px 14px;text-align:center;font-size:12px;border-bottom:1px solid rgba(255,255,255,.04);}
+.matrix-head{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);padding:9px 14px;background:rgba(255,255,255,.025);text-align:center;}
+.good{color:var(--lime);font-weight:700;}
+.bad{color:var(--rose);font-weight:700;}
+.mid{color:var(--amber);font-weight:700;}
+.na{color:var(--t3);}
+
+/* KEYWORD TAG */
+.ktag{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:6px;font-size:11px;font-weight:600;margin:2px;}
+.kt-have{background:rgba(52,211,153,.1);color:var(--mint);border:1px solid rgba(52,211,153,.2);}
+.kt-miss{background:rgba(248,113,113,.08);color:var(--rose);border:1px solid rgba(248,113,113,.18);}
+.kt-add{background:rgba(200,241,53,.08);color:var(--lime);border:1px solid rgba(200,241,53,.18);}
+.kt-neutral{background:rgba(255,255,255,.05);color:var(--t3);border:1px solid var(--rim);}
+
+/* PRODUCT CARD */
+.prod-card{padding:16px;display:flex;flex-direction:column;gap:8px;}
+.pc-thumb{width:100%;aspect-ratio:1;border-radius:8px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:4px;}
+.pc-rank{font-size:10px;font-weight:700;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;}
+.pc-name{font-size:12px;font-weight:700;color:var(--t1);line-height:1.4;}
+.pc-price{font-size:16px;font-weight:800;color:var(--lime);}
+.pc-meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.pc-reviews{font-size:11px;color:var(--t2);}
+
+/* SECTION */
+.sec-h{margin-bottom:20px;}
+.sec-tag{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--t3);margin-bottom:5px;}
+.sec-title{font-size:20px;font-weight:800;letter-spacing:-.025em;}
+.sec-title .hl{color:var(--lime);}
+
+/* INSIGHT BOX */
+.insight{padding:14px 16px;border-radius:var(--r);margin-bottom:10px;border-left:3px solid;}
+.ins-r{background:rgba(248,113,113,.05);border-left-color:var(--rose);}
+.ins-a{background:rgba(251,191,36,.05);border-left-color:var(--amber);}
+.ins-l{background:rgba(200,241,53,.05);border-left-color:var(--lime);}
+.ins-c{background:rgba(34,217,245,.05);border-left-color:var(--cyan);}
+.ins-title{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:4px;}
+.ins-body{font-size:12px;color:var(--t3);line-height:1.65;}
+
+/* THUMBNAIL GRID */
+.thumb-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
+@media(max-width:800px){.thumb-grid{grid-template-columns:repeat(3,1fr);}}
+.tg-item{border-radius:10px;overflow:hidden;border:1px solid var(--rim);}
+.tg-img{width:100%;aspect-ratio:1;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:28px;}
+.tg-info{padding:8px 10px;}
+.tg-brand{font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;}
+.tg-type{font-size:11px;font-weight:700;color:var(--t1);margin-top:2px;}
+.tg-badge{margin-top:4px;}
+
+/* SEO SCORE TABLE */
+.seo-row{display:grid;grid-template-columns:120px repeat(6,1fr);gap:0;border-bottom:1px solid rgba(255,255,255,.04);}
+.seo-row:last-child{border-bottom:none;}
+.seo-cell{padding:9px 10px;font-size:11px;text-align:center;border-right:1px solid rgba(255,255,255,.04);}
+.seo-cell:last-child{border-right:none;}
+.seo-label{text-align:left;font-weight:600;color:var(--t1);font-size:12px;}
+.dot-full{width:10px;height:10px;border-radius:50%;background:var(--lime);display:inline-block;}
+.dot-half{width:10px;height:10px;border-radius:50%;background:var(--amber);display:inline-block;}
+.dot-none{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.15);display:inline-block;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px;}
+
+footer{margin-top:64px;padding:22px 0;border-top:1px solid var(--rim);display:flex;justify-content:space-between;font-size:11.5px;color:var(--t3);}
+footer strong{color:var(--t2);font-weight:700;}
+</style>
+</head>
+<body>
+<div class="aura"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<div class="wrap">
+
+<!-- HEADER -->
+<header class="hdr">
+  <div>
+    <div class="kick"><div class="pip"></div>Papercut · 쿠팡 경쟁사 분석 2025.05</div>
+    <h1 class="htitle">쿠팡 노루지 카테고리<br><span class="gr">경쟁사 비교 분석 리포트</span></h1>
+    <p class="hdesc">쿠팡 "노루지" 검색 상위 10개 경쟁사 vs 페이퍼컷 전방위 분석 · 개선 방향 도출</p>
+  </div>
+  <div style="text-align:right;display:flex;flex-direction:column;gap:6px">
+    <span class="badge b-rose">⚠ 로켓배송 미적용</span>
+    <span class="badge b-amber">검색옵션 대부분 공란</span>
+    <span class="badge b-lime">즉시 개선 가능 항목 다수</span>
+  </div>
+</header>
+
+<!-- TABS -->
+<nav class="tabs">
+  <button class="tb on"  onclick="sw('p1',this)">📊 핵심 지표 요약</button>
+  <button class="tb"     onclick="sw('p2',this)">🏆 경쟁사 순위 분석</button>
+  <button class="tb"     onclick="sw('p3',this)">🖼 썸네일 & 상품명</button>
+  <button class="tb"     onclick="sw('p4',this)">🔍 SEO 비교 매트릭스</button>
+  <button class="tb"     onclick="sw('p5',this)">📦 상세페이지 가이드</button>
+  <button class="tb"     onclick="sw('p6',this)">💡 전략 인사이트</button>
+</nav>
+
+<!-- ═══ P1 핵심 지표 요약 ═══ -->
+<section id="p1" class="pane on">
+  <div class="grid g4">
+    <div class="glass rt stat"><div class="sl">로켓배송 비율 (상위10)</div><div class="sv sv-rose">80<span style="font-size:18px">%</span></div><div class="ss">10개 중 8개 · 페이퍼컷 ✗</div></div>
+    <div class="glass at stat"><div class="sl">최대 리뷰 수 (경쟁사)</div><div class="sv sv-amber">1,934<span style="font-size:16px">개</span></div><div class="ss">종이마을 4위 · 압도적 격차</div></div>
+    <div class="glass lt stat"><div class="sl">상위권 가격 중간값</div><div class="sv sv-lime">11,020<span style="font-size:16px">원</span></div><div class="ss">8,600~14,200원 구간 집중</div></div>
+    <div class="glass ct stat"><div class="sl">페이퍼컷 검색어 등록률</div><div class="sv sv-cyan">38<span style="font-size:18px">%</span></div><div class="ss">최대 40개 중 평균 15개 수준</div></div>
+  </div>
+
+  <div class="grid g2" style="margin-bottom:12px">
+    <!-- 브랜드 점유율 -->
+    <div class="glass lt" style="padding:22px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:18px">🏅 상위 10위 브랜드 점유율</div>
+      <div class="bar-row">
+        <div class="bar-label">올페이퍼</div>
+        <div class="bar-wrap">
+          <div class="bar-track"><div class="bar-fill" style="width:30%;background:linear-gradient(90deg,var(--lime),var(--cyan))"></div></div>
+          <div class="bar-sub">1위·2위·9위 · 로켓배송 전부</div>
+        </div>
+        <div class="bar-val" style="color:var(--lime)">3개</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">종이마을</div>
+        <div class="bar-wrap">
+          <div class="bar-track"><div class="bar-fill" style="width:20%;background:linear-gradient(90deg,var(--cyan),var(--ind))"></div></div>
+          <div class="bar-sub">4위·5위 · 리뷰 1,934개 최다</div>
+        </div>
+        <div class="bar-val" style="color:var(--cyan)">2개</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">앵신베이퍼</div>
+        <div class="bar-wrap">
+          <div class="bar-track"><div class="bar-fill" style="width:20%;background:linear-gradient(90deg,var(--ind),var(--pink))"></div></div>
+          <div class="bar-sub">3위·7위 · 로켓배송</div>
+        </div>
+        <div class="bar-val" style="color:var(--ind)">2개</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">크라프트루머라이</div>
+        <div class="bar-wrap">
+          <div class="bar-track"><div class="bar-fill" style="width:10%;background:var(--amber)"></div></div>
+          <div class="bar-sub">8위 · 728 리뷰</div>
+        </div>
+        <div class="bar-val" style="color:var(--amber)">1개</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">기타</div>
+        <div class="bar-wrap">
+          <div class="bar-track"><div class="bar-fill" style="width:20%;background:rgba(255,255,255,.2)"></div></div>
+          <div class="bar-sub">6위·10위 · 소규모 셀러</div>
+        </div>
+        <div class="bar-val" style="color:var(--t3)">2개</div>
+      </div>
+    </div>
+
+    <!-- 로켓 vs 일반 -->
+    <div class="glass ct" style="padding:22px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:18px">🚀 배송 유형별 평균 지표</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+        <div style="background:rgba(200,241,53,.07);border:1px solid rgba(200,241,53,.2);border-radius:10px;padding:14px;text-align:center">
+          <div style="font-size:10px;color:var(--lime);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px">로켓배송 상품</div>
+          <div style="font-size:26px;font-weight:800;color:var(--lime)">8개</div>
+          <div style="font-size:11px;color:var(--t3);margin-top:4px">상위 10개 중</div>
+          <div style="margin-top:10px;font-size:12px;color:var(--t2)">평균 리뷰 <strong style="color:var(--lime)">619개</strong></div>
+          <div style="font-size:12px;color:var(--t2)">평균 별점 <strong style="color:var(--lime)">★4.5</strong></div>
+        </div>
+        <div style="background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.2);border-radius:10px;padding:14px;text-align:center">
+          <div style="font-size:10px;color:var(--rose);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px">일반배송 상품</div>
+          <div style="font-size:26px;font-weight:800;color:var(--rose)">2개</div>
+          <div style="font-size:11px;color:var(--t3);margin-top:4px">상위 10개 중</div>
+          <div style="margin-top:10px;font-size:12px;color:var(--t2)">평균 리뷰 <strong style="color:var(--rose)">8개</strong></div>
+          <div style="font-size:12px;color:var(--t2)">평균 별점 <strong style="color:var(--rose)">★3.5↓</strong></div>
+        </div>
+      </div>
+      <div class="alert ar" style="margin-bottom:0"><span>🚨</span><div><strong>페이퍼컷은 현재 일반배송.</strong> 로켓배송 전환 없이 상위 노출은 구조적으로 불리. 로켓그로스(위탁) 입점이 최우선 과제.</div></div>
+    </div>
+  </div>
+
+  <!-- 페이퍼컷 현재 상태 진단 -->
+  <div class="glass at" style="padding:22px">
+    <div style="font-size:14px;font-weight:700;margin-bottom:18px">🔎 페이퍼컷 현재 상태 자가 진단</div>
+    <div class="grid g3">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--t2);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--rim)">✅ 잘 되어 있는 것</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.9">
+          · 카테고리: 유산지·주방일회용품 정확히 설정<br>
+          · 브랜드명 "페이퍼컷" 일관 등록<br>
+          · 35g 신규 시리즈 검색어 20개 등록<br>
+          · 규격 다양성: 8가지 사이즈 커버<br>
+          · 검색옵션 일부 상품 상세 입력<br>
+          · 스타핑 라인업 별도 카테고리 운영
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--rose);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--rim)">🚨 즉시 고쳐야 할 것</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.9">
+          · 상품명에 "의류포장지 신발포장지" — 즉시 삭제<br>
+          · 검색옵션 대부분 공란 — 전 상품 채우기<br>
+          · 30g 구형 시리즈 검색어 9개 — 40개로 확장<br>
+          · 제조사 필드 4개 상품 누락<br>
+          · 카테고리 혼재 (1개만 기름종이)<br>
+          · 로켓배송 미적용 — 상위 노출 구조적 불리
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--amber);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--rim)">📋 중기 개선 과제</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.9">
+          · 로켓그로스 입점 검토<br>
+          · 리뷰 수 경쟁사 대비 격차 해소<br>
+          · 썸네일 이미지 경쟁사 수준 개선<br>
+          · 상세페이지 인포그래픽 구성<br>
+          · 쿠팡 광고(로켓 광고) 집행<br>
+          · 묶음 상품·세트 상품 구성 추가
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ P2 경쟁사 순위 분석 ═══ -->
+<section id="p2" class="pane">
+  <div class="alert ai"><span>ℹ️</span><div>쿠팡 "노루지" 검색 결과 기준 (2025.05.10 기준) · 광고 상품 포함 순위 · 배지 번호 기준 순위 정렬</div></div>
+
+  <div class="glass" style="padding:0;overflow:hidden;margin-bottom:14px">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th style="width:50px">순위</th>
+          <th>상품명</th>
+          <th>브랜드</th>
+          <th>가격</th>
+          <th>리뷰</th>
+          <th>별점</th>
+          <th>배송</th>
+          <th>페이퍼컷 대비</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="rank-num" style="color:var(--amber)">1</span></td>
+          <td style="font-size:12px;font-weight:600;color:var(--t1);max-width:240px">올페이퍼 식품 두꺼운노루지 시트형 30×30cm 3층, 1세트</td>
+          <td><span style="color:var(--lime);font-weight:700">올페이퍼</span></td>
+          <td class="mono">11,020원</td>
+          <td><strong style="color:var(--t1)">605</strong></td>
+          <td><span class="stars">★</span><span style="font-size:12px">4.5</span></td>
+          <td><span class="seller-badge sb-rocket">🚀 로켓</span></td>
+          <td><span class="bad">리뷰 열세</span></td>
+        </tr>
+        <tr>
+          <td><span class="rank-num" style="color:var(--t2)">2</span></td>
+          <td style="font-size:12px;font-weight:600;color:var(--t1);max-width:240px">올페이퍼 식품 두꺼운노루지 시트형 60×45cm 4층, 600mm, 200매</td>
+          <td><span style="color:var(--lime);font-weight:700">올페이퍼</span></td>
+          <td class="mono">11,020원</td>
+          <td><strong style="color:var(--t1)">605</strong></td>
+          <td><span class="stars">★</span><span style="font-size:12px">4.5</span></td>
+          <td><span class="seller-badge sb-rocket">🚀 로켓</span></td>
+          <td><span class="bad">리뷰 열세</span></td>
+        </tr>
+        <tr>
+          <td><span class="rank-num" style="color:var(--t3)">3</span></td>
+          <td style="font-size:12px;font-weight:600;color:var(--t1);max-width:240px">앵신베이퍼 B 노루지 시트형 600×450mm, 1개입, 1000매</td>
+          <td><span style="color:var(--cyan);font-weight:700">앵신베이퍼</span></td>
+          <td class="mono">34,600원</td>
+          <td><strong style="color:var(--t1)">92</strong></td>
+          <td><span class="stars">★</span><span style="font-size:12px">4.2</span></td>
+          <td><span class="seller-badge sb-rocket">🚀 로켓</span></td>
+          <td><span class="mid">가격 고가</span></td>
+        </tr>
+        <tr style="background:rgba(248,113,113,.03)">
+          <td><span class="rank-num" style="color:var(--rose)">4</span></td>
+          <td style="font-size:12px;font-weight:600;color:var(--t1);max-width:240px">종이마을 식품 기름종이 시트형 22.5×30cm, 25cm, 500매</td>
+          <td><span style="color:var(--rose);font-weight:700">종이마을</span></td>
+          <td class="mono">8,600원</td>
+          <td><strong style="color:var(--rose)">1,934 🔥</strong></td>
+          <td><span class="stars">★</span><span style="font-size:12px">4.7</span></td>
+          <td><span class="seller-badge sb-rocket">🚀 로켓</span></td>
+          <td><span class="bad">리뷰 압도적 열세</span></td>
+        </tr>
+        <tr>
+          <td><span class="rank-num" style="color:var(--t3)">5</span></td>
+          <td style="font-size:12px;font-weight:600;color:var(--t1);max-width:240px">종이마을 식품 시트형 22.5×15cm, 150mm, 1000매</td>
+          <td><span style="color:var(--rose);font-weight:700">종이마을</span></td>
+          <td class="mono">11,000원</td>
+          <td><strong style="color:var(--t1)">578</strong></td>
+          <td><span class="stars">★</span><span style="font-size:12px">4.5</span></td>
+          <td><span class="seller-badge sb-rocket">🚀 로켓</span></td>
+          <td><span class="bad">리뷰 열세</span></td>
+        </tr>
+        <tr>
+          <td><span class="rank-num" style="color:var(--t3)">6</span></td>
+          <td style="font-size:12px;font-weight:600;color:var(--t1);max-width:240px">식품용유산지노루지 1세트, 1000개</td>
+          <td><span style="color:var(--t3);font-weight:700">미확인</span></td>
+          <td class="mono">14,900원</td>
+          <td><strong style="color:var(--t1)">15</strong></td>
+          <td><span class="stars">★</span><span style="font-size:12px">4.4</span></td>
+          <td><span class="seller-badge sb-seller">📦 판매자</span></td>
+          <td><span class="good">리뷰 우세 가능</span></td>
+        </tr>
+        <tr>
+          <td><span class="rank-num" style="color:var(--t3)">7</span></td>
+          <td style="font-size:12px;font-weight:600;color:var(--t1);max-width:240px">앵신베이퍼 황노루지 크라프트 식품봉 기름종이 시트형 30cm, 1000매</td>
+          <td><span style="color:var(--cyan);font-weight:700">앵신베이퍼</span></td>
+          <td class="mono">14,200원</td>
+          <td><strong style="color:var(--t1)">64</strong></td>
+          <td><span class="stars">★</span><span style="font-size:12px">4.2</span></td>
+          <td><span class="seller-badge sb-rocket">🚀 로켓</span></td>
+          <td><span class="mid">비슷</span></td>
+        </tr>
+        <tr>
+          <td><span class="rank-num" style="color:var(--t3)">8</span></td>
+          <td style="font-size:12px;font-weight:600;color:var(--t1);max-width:240px">크라프트 루머라이 노루지 30×30cm, 100개입</td>
+          <td><span style="color:var(--t3);font-weight:700">루머라이</span></td>
+          <td class="mono">7,160원</td>
+          <td><strong style="color:var(--t1)">728</strong></td>
+          <td><span class="stars">★</span><span style="font-size:12px">4.3</span></td>
+          <td><span class="seller-badge sb-rocket">🚀 로켓</span></td>
+          <td><span class="bad">리뷰 열세</span></td>
+        </tr>
+        <tr>
+          <td><span class="rank-num" style="color:var(--t3)">9</span></td>
+          <td style="font-size:12px;font-weight:600;color:var(--t1);max-width:240px">올페이퍼 기름 흡수 식품봉 두꺼운노루지 8밀 시트형 45×30cm, 400매</td>
+          <td><span style="color:var(--lime);font-weight:700">올페이퍼</span></td>
+          <td class="mono">10,680원</td>
+          <td><strong style="color:var(--t1)">132</strong></td>
+          <td><span class="stars">★</span><span style="font-size:12px">4.3</span></td>
+          <td><span class="seller-badge sb-rocket">🚀 로켓</span></td>
+          <td><span class="bad">리뷰 열세</span></td>
+        </tr>
+        <tr>
+          <td><span class="rank-num" style="color:var(--t3)">10</span></td>
+          <td style="font-size:12px;font-weight:600;color:var(--t1);max-width:240px">헤피니스 노루지 그린 30×30cm, 1세트, 100개입</td>
+          <td><span style="color:var(--t3);font-weight:700">헤피니스</span></td>
+          <td class="mono">7,120원</td>
+          <td><strong style="color:var(--t1)">1</strong></td>
+          <td><span class="stars">-</span></td>
+          <td><span class="seller-badge sb-seller">📦 판매자</span></td>
+          <td><span class="good">리뷰 우세 가능</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 리뷰 수 바 차트 -->
+  <div class="glass at" style="padding:22px">
+    <div style="font-size:14px;font-weight:700;margin-bottom:18px">📊 브랜드별 리뷰 수 비교</div>
+    <div class="bar-row">
+      <div class="bar-label">종이마을 4위</div>
+      <div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,var(--rose),var(--pink))"></div></div></div>
+      <div class="bar-val" style="color:var(--rose)">1,934</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">루머라이 8위</div>
+      <div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:37%;background:linear-gradient(90deg,var(--amber),var(--lime))"></div></div></div>
+      <div class="bar-val" style="color:var(--amber)">728</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">올페이퍼 1·2위</div>
+      <div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:31%;background:linear-gradient(90deg,var(--lime),var(--cyan))"></div></div></div>
+      <div class="bar-val" style="color:var(--lime)">605</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">종이마을 5위</div>
+      <div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:29%;background:var(--cyan)"></div></div></div>
+      <div class="bar-val" style="color:var(--cyan)">578</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">올페이퍼 9위</div>
+      <div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:7%;background:var(--ind)"></div></div></div>
+      <div class="bar-val" style="color:var(--ind)">132</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">앵신베이퍼 3위</div>
+      <div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:5%;background:rgba(255,255,255,.3)"></div></div></div>
+      <div class="bar-val" style="color:var(--t3)">92</div>
+    </div>
+    <div class="bar-row" style="background:rgba(248,113,113,.03)">
+      <div class="bar-label" style="color:var(--rose)">페이퍼컷 (추정)</div>
+      <div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:3%;background:var(--rose)"></div></div></div>
+      <div class="bar-val" style="color:var(--rose)">?개</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ P3 썸네일 & 상품명 ═══ -->
+<section id="p3" class="pane">
+  <div class="sec-h"><div class="sec-tag">Thumbnail & Product Name Analysis</div><div class="sec-title">썸네일 이미지 & 상품명 <span class="hl">전략 분석</span></div></div>
+
+  <!-- 썸네일 유형 분석 -->
+  <div class="glass lt" style="padding:22px;margin-bottom:12px">
+    <div style="font-size:14px;font-weight:700;margin-bottom:16px">🖼 경쟁사 썸네일 유형 분류 (상위 10위)</div>
+    <div class="thumb-grid">
+      <div class="tg-item glass">
+        <div class="tg-img">🤍</div>
+        <div class="tg-info">
+          <div class="tg-brand">올페이퍼 1·2위</div>
+          <div class="tg-type">흰 배경 + 스택 쌓기</div>
+          <div class="tg-badge"><span class="badge b-lime" style="font-size:9px">베스트 프랙티스</span></div>
+        </div>
+      </div>
+      <div class="tg-item glass">
+        <div class="tg-img">📄</div>
+        <div class="tg-info">
+          <div class="tg-brand">앵신베이퍼 3위</div>
+          <div class="tg-type">흰 배경 + 1장 펼침</div>
+          <div class="tg-badge"><span class="badge b-lime" style="font-size:9px">심플 클린</span></div>
+        </div>
+      </div>
+      <div class="tg-item glass">
+        <div class="tg-img">🧾</div>
+        <div class="tg-info">
+          <div class="tg-brand">종이마을 4·5위</div>
+          <div class="tg-type">박스 패키지 + 텍스트</div>
+          <div class="tg-badge"><span class="badge b-amber" style="font-size:9px">정보형</span></div>
+        </div>
+      </div>
+      <div class="tg-item glass">
+        <div class="tg-img">🟫</div>
+        <div class="tg-info">
+          <div class="tg-brand">앵신베이퍼 7위</div>
+          <div class="tg-type">크라프트 컬러 강조</div>
+          <div class="tg-badge"><span class="badge b-amber" style="font-size:9px">컬러 차별화</span></div>
+        </div>
+      </div>
+      <div class="tg-item glass">
+        <div class="tg-img">📦</div>
+        <div class="tg-info">
+          <div class="tg-brand">루머라이 8위</div>
+          <div class="tg-type">번들 패키지 이미지</div>
+          <div class="tg-badge"><span class="badge b-cyan" style="font-size:9px">수량 강조</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px">
+      <div class="insight ins-l">
+        <div class="ins-title">✅ 상위권 썸네일 공통 패턴</div>
+        <div class="ins-body">①흰 배경 또는 연한 배경 / ②상품을 겹쳐 쌓아 수량감 표현 / ③정면 + 45도 앵글 2가지 이상 / ④규격·수량을 이미지에 텍스트로 표기 / ⑤고해상도 선명한 사진</div>
+      </div>
+      <div class="insight ins-r">
+        <div class="ins-title">🚨 피해야 할 썸네일 패턴</div>
+        <div class="ins-body">배경색이 어둡거나 복잡한 이미지 / 상품 외 소품 과다 / 워터마크 크게 삽입 / 해상도 낮은 흐린 사진 / 텍스트 없는 단순 펼침 사진</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 상품명 구조 분석 -->
+  <div class="glass ct" style="padding:22px;margin-bottom:12px">
+    <div style="font-size:14px;font-weight:700;margin-bottom:16px">📝 경쟁사 상위권 상품명 구조 분석</div>
+
+    <div style="margin-bottom:16px">
+      <div style="font-size:11px;color:var(--t3);margin-bottom:8px;font-weight:600">1위 올페이퍼 상품명 분해</div>
+      <div style="background:rgba(255,255,255,.03);border:1px solid var(--rim);border-radius:8px;padding:12px;font-size:12px;line-height:2">
+        <span style="background:rgba(200,241,53,.15);color:var(--lime);padding:2px 6px;border-radius:4px;font-weight:700">올페이퍼</span>
+        <span style="color:var(--t3)"> · </span>
+        <span style="background:rgba(34,217,245,.12);color:var(--cyan);padding:2px 6px;border-radius:4px;font-weight:700">식품</span>
+        <span style="color:var(--t3)"> · </span>
+        <span style="background:rgba(248,113,113,.12);color:var(--rose);padding:2px 6px;border-radius:4px;font-weight:700">두꺼운노루지</span>
+        <span style="color:var(--t3)"> · </span>
+        <span style="background:rgba(129,140,248,.12);color:var(--ind);padding:2px 6px;border-radius:4px;font-weight:700">시트형</span>
+        <span style="color:var(--t3)"> · </span>
+        <span style="background:rgba(251,191,36,.12);color:var(--amber);padding:2px 6px;border-radius:4px;font-weight:700">30×30cm</span>
+        <span style="color:var(--t3)"> · </span>
+        <span style="background:rgba(52,211,153,.12);color:var(--mint);padding:2px 6px;border-radius:4px;font-weight:700">3층</span>
+        <span style="color:var(--t3)">, </span>
+        <span style="background:rgba(52,211,153,.12);color:var(--mint);padding:2px 6px;border-radius:4px;font-weight:700">1세트</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;font-size:11px;color:var(--t3)">
+        <span>🟢 브랜드</span><span>🔵 용도</span><span>🔴 메인키워드+특징</span><span>🟣 형태</span><span>🟡 규격</span><span>🟩 두께+수량</span>
+      </div>
+    </div>
+
+    <div style="margin-bottom:16px">
+      <div style="font-size:11px;color:var(--t3);margin-bottom:8px;font-weight:600">4위 종이마을 상품명 분해 (리뷰 최다)</div>
+      <div style="background:rgba(255,255,255,.03);border:1px solid var(--rim);border-radius:8px;padding:12px;font-size:12px;line-height:2">
+        <span style="background:rgba(200,241,53,.15);color:var(--lime);padding:2px 6px;border-radius:4px;font-weight:700">종이마을</span>
+        <span style="color:var(--t3)"> · </span>
+        <span style="background:rgba(34,217,245,.12);color:var(--cyan);padding:2px 6px;border-radius:4px;font-weight:700">식품</span>
+        <span style="color:var(--t3)"> · </span>
+        <span style="background:rgba(248,113,113,.12);color:var(--rose);padding:2px 6px;border-radius:4px;font-weight:700">기름종이</span>
+        <span style="color:var(--t3)"> · </span>
+        <span style="background:rgba(129,140,248,.12);color:var(--ind);padding:2px 6px;border-radius:4px;font-weight:700">시트형</span>
+        <span style="color:var(--t3)"> · </span>
+        <span style="background:rgba(251,191,36,.12);color:var(--amber);padding:2px 6px;border-radius:4px;font-weight:700">22.5×30cm</span>
+        <span style="color:var(--t3)">, </span>
+        <span style="background:rgba(251,191,36,.12);color:var(--amber);padding:2px 6px;border-radius:4px;font-weight:700">25cm</span>
+        <span style="color:var(--t3)">, </span>
+        <span style="background:rgba(52,211,153,.12);color:var(--mint);padding:2px 6px;border-radius:4px;font-weight:700">500매</span>
+      </div>
+    </div>
+
+    <!-- 페이퍼컷 현재 vs 최적화 -->
+    <div style="margin-bottom:16px">
+      <div style="font-size:11px;color:var(--t3);margin-bottom:8px;font-weight:600">페이퍼컷 현재 vs 최적화 비교</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.2);border-radius:8px;padding:12px">
+          <div style="font-size:10px;color:var(--rose);font-weight:700;margin-bottom:8px">🚨 현재 상품명 (문제 있음)</div>
+          <div style="font-size:12px;color:var(--t2);line-height:1.7">30g 노루지 1000장 식품지 식품용지 유산지 트레이종이 <span style="color:var(--rose);text-decoration:line-through">의류포장지 신발포장지</span></div>
+          <div style="margin-top:8px;font-size:11px;color:var(--rose)">❌ 카테고리 불일치 키워드 · 중복 키워드 과다</div>
+        </div>
+        <div style="background:rgba(200,241,53,.06);border:1px solid rgba(200,241,53,.2);border-radius:8px;padding:12px">
+          <div style="font-size:10px;color:var(--lime);font-weight:700;margin-bottom:8px">✅ 최적화 상품명 (권장)</div>
+          <div style="font-size:12px;color:var(--t2);line-height:1.7">[페이퍼컷] <span style="color:var(--lime);font-weight:700">노루지</span> 30g <span style="color:var(--cyan)">식품용</span> <span style="color:var(--amber)">300×225mm</span> <span style="color:var(--mint)">1000매</span> 유산지 트레이종이 쟁반종이</div>
+          <div style="margin-top:8px;font-size:11px;color:var(--lime)">✅ 브랜드+메인KW+스펙+수량+연관KW</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 검색어(태그) 비교 -->
+  <div class="glass it" style="padding:22px">
+    <div style="font-size:14px;font-weight:700;margin-bottom:16px">🏷 검색어(태그) 현황 — 페이퍼컷 vs 권장</div>
+    <div class="grid g2">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--rose);margin-bottom:10px">현재 등록된 태그 (30g 구형 시리즈 · 9개)</div>
+        <div>
+          <span class="ktag kt-have">노루지</span><span class="ktag kt-have">빵쟁반종이</span><span class="ktag kt-have">빵종이</span>
+          <span class="ktag kt-have">식품용지</span><span class="ktag kt-have">식품지</span><span class="ktag kt-have">유산지</span>
+          <span class="ktag kt-have">쟁반깔지</span><span class="ktag kt-have">쟁반종이</span><span class="ktag kt-have">트레이종이</span>
+        </div>
+        <div style="margin-top:10px;font-size:11px;color:var(--rose)">⚠ 40개 중 9개만 등록 · 활용률 22.5%</div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--lime);margin-bottom:10px">추가 권장 태그 (31개 · 즉시 등록 가능)</div>
+        <div>
+          <span class="ktag kt-add">기름종이</span><span class="ktag kt-add">치킨포장지</span><span class="ktag kt-add">치킨기름흡수지</span>
+          <span class="ktag kt-add">튀김종이</span><span class="ktag kt-add">종이호일</span><span class="ktag kt-add">배달종이</span>
+          <span class="ktag kt-add">김밥포장지</span><span class="ktag kt-add">베이커리포장지</span><span class="ktag kt-add">베이킹포장</span>
+          <span class="ktag kt-add">샌드위치포장지</span><span class="ktag kt-add">베이커리호일</span><span class="ktag kt-add">쟁반깔지</span>
+          <span class="ktag kt-add">치킨포장</span><span class="ktag kt-add">치킨포장지</span><span class="ktag kt-add">식품포장지</span>
+          <span class="ktag kt-add">페이퍼컷</span><span class="ktag kt-add">노루지도매</span><span class="ktag kt-add">업소용노루지</span>
+          <span class="ktag kt-add">식당노루지</span><span class="ktag kt-add">무코팅식품지</span><span class="ktag kt-add">대량노루지</span>
+          <span class="ktag kt-add">베이킹페이퍼</span><span class="ktag kt-add">제과용지</span><span class="ktag kt-add">포장지도매</span>
+          <span class="ktag kt-add">제과포장지</span><span class="ktag kt-add">육류포장지</span><span class="ktag kt-add">1000매노루지</span>
+          <span class="ktag kt-add">한쪽광택지</span><span class="ktag kt-add">맞춤재단</span><span class="ktag kt-add">치킨집종이</span>
+          <span class="ktag kt-add">분식포장지</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ P4 SEO 비교 매트릭스 ═══ -->
+<section id="p4" class="pane">
+  <div class="sec-h"><div class="sec-tag">SEO Comparison Matrix</div><div class="sec-title">SEO 요소별 <span class="hl">비교 매트릭스</span></div></div>
+
+  <div class="alert ai"><span>ℹ️</span><div>● 충족 &nbsp;◑ 부분충족 &nbsp;○ 미충족 &nbsp;— 확인불가 기준. 쿠팡 노출 알고리즘 주요 요소 기준.</div></div>
+
+  <!-- SEO 요소 비교표 -->
+  <div class="glass" style="overflow:hidden;margin-bottom:14px">
+    <div style="overflow-x:auto">
+      <table class="tbl" style="min-width:700px">
+        <thead>
+          <tr>
+            <th style="min-width:140px">SEO 항목</th>
+            <th style="text-align:center">올페이퍼<br><span style="color:var(--lime);font-size:9px">1·2위</span></th>
+            <th style="text-align:center">종이마을<br><span style="color:var(--rose);font-size:9px">4위 리뷰1934</span></th>
+            <th style="text-align:center">앵신베이퍼<br><span style="color:var(--cyan);font-size:9px">3위</span></th>
+            <th style="text-align:center">루머라이<br><span style="color:var(--amber);font-size:9px">8위 리뷰728</span></th>
+            <th style="text-align:center;background:rgba(248,113,113,.05)">페이퍼컷<br><span style="color:var(--rose);font-size:9px">현재</span></th>
+            <th style="text-align:center;background:rgba(200,241,53,.05)">페이퍼컷<br><span style="color:var(--lime);font-size:9px">목표</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="font-weight:600;font-size:12px">브랜드명 등록</td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell" style="background:rgba(200,241,53,.03)"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">제조사명 등록</td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-half"></span></td><td class="matrix-cell" style="background:rgba(248,113,113,.03)"><span class="dot-half"></span></td><td class="matrix-cell"><span class="dot-full"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">상품명 키워드 최적화</td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell" style="background:rgba(248,113,113,.03)"><span class="dot-half"></span></td><td class="matrix-cell"><span class="dot-full"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">검색어 40개 등록</td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell" style="background:rgba(248,113,113,.03)"><span class="dot-half" style="background:var(--rose)"></span></td><td class="matrix-cell"><span class="dot-full"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">검색옵션 (사이즈 등)</td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-half"></span></td><td class="matrix-cell" style="background:rgba(248,113,113,.03)"><span class="dot-none"></span></td><td class="matrix-cell"><span class="dot-full"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">유산지 코팅 여부</td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-half"></span></td><td class="matrix-cell"><span class="dot-half"></span></td><td class="matrix-cell" style="background:rgba(248,113,113,.03)"><span class="dot-none"></span></td><td class="matrix-cell"><span class="dot-full"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">내지매수 입력</td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell" style="background:rgba(248,113,113,.03)"><span class="dot-half"></span></td><td class="matrix-cell"><span class="dot-full"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">로켓배송</td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell" style="background:rgba(248,113,113,.03)"><span class="dot-none"></span></td><td class="matrix-cell"><span class="dot-full"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">리뷰 100개 이상</td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-none"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell" style="background:rgba(248,113,113,.03)"><span class="dot-none"></span></td><td class="matrix-cell"><span class="dot-full"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">별점 4.5 이상</td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-half"></span></td><td class="matrix-cell"><span class="dot-half"></span></td><td class="matrix-cell" style="background:rgba(248,113,113,.03)"><span class="dot-half"></span></td><td class="matrix-cell"><span class="dot-full"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">썸네일 고품질</td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-half"></span></td><td class="matrix-cell" style="background:rgba(248,113,113,.03)"><span class="dot-half"></span></td><td class="matrix-cell"><span class="dot-full"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">상세페이지 인포그래픽</td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-full"></span></td><td class="matrix-cell"><span class="dot-half"></span></td><td class="matrix-cell"><span class="dot-none"></span></td><td class="matrix-cell" style="background:rgba(248,113,113,.03)"><span class="dot-none"></span></td><td class="matrix-cell"><span class="dot-full"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="padding:12px 16px;background:rgba(255,255,255,.02);font-size:11px;color:var(--t3);display:flex;gap:16px">
+      <span><span class="dot-full"></span> 충족</span>
+      <span><span class="dot-half"></span> 부분 충족</span>
+      <span><span class="dot-none"></span> 미충족</span>
+    </div>
+  </div>
+
+  <!-- SEO 종합 점수 -->
+  <div class="glass at" style="padding:22px">
+    <div style="font-size:14px;font-weight:700;margin-bottom:18px">📊 브랜드별 SEO 종합 점수 (12개 항목 기준)</div>
+    <div class="grid g4">
+      <div class="score-wrap">
+        <div class="score-ring">
+          <svg viewBox="0 0 120 120" width="120" height="120">
+            <circle class="score-bg" cx="60" cy="60" r="50"></circle>
+            <circle stroke="var(--lime)" stroke-dasharray="283" stroke-dashoffset="28" cx="60" cy="60" r="50"></circle>
+          </svg>
+          <div class="score-num"><span class="score-n" style="color:var(--lime)">90</span><span class="score-l">올페이퍼</span></div>
+        </div>
+        <div style="font-size:11px;color:var(--t3);text-align:center;margin-top:6px">1·2위 · 12개 중 11개</div>
+      </div>
+      <div class="score-wrap">
+        <div class="score-ring">
+          <svg viewBox="0 0 120 120" width="120" height="120">
+            <circle class="score-bg" cx="60" cy="60" r="50"></circle>
+            <circle stroke="var(--cyan)" stroke-dasharray="283" stroke-dashoffset="14" cx="60" cy="60" r="50"></circle>
+          </svg>
+          <div class="score-num"><span class="score-n" style="color:var(--cyan)">95</span><span class="score-l">종이마을</span></div>
+        </div>
+        <div style="font-size:11px;color:var(--t3);text-align:center;margin-top:6px">4위 · 리뷰 최다 보유</div>
+      </div>
+      <div class="score-wrap">
+        <div class="score-ring">
+          <svg viewBox="0 0 120 120" width="120" height="120">
+            <circle class="score-bg" cx="60" cy="60" r="50"></circle>
+            <circle stroke="var(--amber)" stroke-dasharray="283" stroke-dashoffset="85" cx="60" cy="60" r="50"></circle>
+          </svg>
+          <div class="score-num"><span class="score-n" style="color:var(--amber)">70</span><span class="score-l">앵신베이퍼</span></div>
+        </div>
+        <div style="font-size:11px;color:var(--t3);text-align:center;margin-top:6px">3위 · 로켓만 강점</div>
+      </div>
+      <div class="score-wrap" style="position:relative">
+        <div style="position:absolute;top:8px;right:8px;font-size:9px;background:rgba(248,113,113,.2);color:var(--rose);padding:2px 6px;border-radius:4px;font-weight:700">현재 상태</div>
+        <div class="score-ring">
+          <svg viewBox="0 0 120 120" width="120" height="120">
+            <circle class="score-bg" cx="60" cy="60" r="50"></circle>
+            <circle stroke="var(--rose)" stroke-dasharray="283" stroke-dashoffset="198" cx="60" cy="60" r="50"></circle>
+          </svg>
+          <div class="score-num"><span class="score-n" style="color:var(--rose)">30</span><span class="score-l">페이퍼컷</span></div>
+        </div>
+        <div style="font-size:11px;color:var(--rose);text-align:center;margin-top:6px">⚠ 즉시 개선 필요</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ P5 상세페이지 가이드 ═══ -->
+<section id="p5" class="pane">
+  <div class="sec-h"><div class="sec-tag">Product Detail Page Guide</div><div class="sec-title">쿠팡 상세페이지 <span class="hl">구성 가이드</span></div></div>
+
+  <div class="alert ag"><span>💡</span><div>쿠팡 상세페이지는 <strong>모바일 기준 설계</strong>가 필수. 첫 3초에 핵심 정보 전달, 이미지 중심 구성.</div></div>
+
+  <!-- 상세페이지 구조 -->
+  <div class="glass lt" style="padding:22px;margin-bottom:12px">
+    <div style="font-size:14px;font-weight:700;margin-bottom:18px">📱 권장 상세페이지 구성 순서 (모바일 기준)</div>
+
+    <div style="display:flex;flex-direction:column;gap:0">
+      <div style="display:flex;gap:0">
+        <div style="width:32px;display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+          <div style="width:24px;height:24px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#000">1</div>
+          <div style="width:2px;flex:1;background:rgba(255,255,255,.08);margin:4px 0"></div>
+        </div>
+        <div style="flex:1;padding:0 0 20px 12px">
+          <div style="font-size:13px;font-weight:700;color:var(--lime);margin-bottom:6px">Hero 배너 — 핵심 메시지 1장</div>
+          <div style="font-size:12px;color:var(--t3);line-height:1.7">상품명 + 핵심 USP 2~3줄 / 배경 흰색 / 상품 이미지 선명하게 / "30g 무코팅 식품용 노루지" 한 눈에 인식</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:0">
+        <div style="width:32px;display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+          <div style="width:24px;height:24px;border-radius:50%;background:var(--cyan);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#000">2</div>
+          <div style="width:2px;flex:1;background:rgba(255,255,255,.08);margin:4px 0"></div>
+        </div>
+        <div style="flex:1;padding:0 0 20px 12px">
+          <div style="font-size:13px;font-weight:700;color:var(--cyan);margin-bottom:6px">규격 선택 안내 — 옵션 가이드</div>
+          <div style="font-size:12px;color:var(--t3);line-height:1.7">사이즈별 용도 표 (A4/300×225 → 샌드위치·빵, 600×450 → 쟁반·치킨) / 옵션이 많으면 이 구간에서 이탈률 높음</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:0">
+        <div style="width:32px;display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+          <div style="width:24px;height:24px;border-radius:50%;background:var(--amber);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#000">3</div>
+          <div style="width:2px;flex:1;background:rgba(255,255,255,.08);margin:4px 0"></div>
+        </div>
+        <div style="flex:1;padding:0 0 20px 12px">
+          <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:6px">소재·안전 인증 — 신뢰 구축</div>
+          <div style="font-size:12px;color:var(--t3);line-height:1.7">무코팅 설명 / 식품 접촉 안전 기준 충족 강조 / 원재료·중량 명시 / 식품 판매자가 가장 많이 묻는 질문</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:0">
+        <div style="width:32px;display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+          <div style="width:24px;height:24px;border-radius:50%;background:var(--rose);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#000">4</div>
+          <div style="width:2px;flex:1;background:rgba(255,255,255,.08);margin:4px 0"></div>
+        </div>
+        <div style="flex:1;padding:0 0 20px 12px">
+          <div style="font-size:13px;font-weight:700;color:var(--rose);margin-bottom:6px">사용 예시 사진 — 실사용 장면</div>
+          <div style="font-size:12px;color:var(--t3);line-height:1.7">치킨 포장, 빵 포장, 쟁반 깔기, 튀김 흡수 실제 사진 / 업소 실사용 이미지가 구매 결정에 강력한 영향</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:0">
+        <div style="width:32px;display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+          <div style="width:24px;height:24px;border-radius:50%;background:var(--mint);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#000">5</div>
+          <div style="width:2px;flex:1;background:rgba(255,255,255,.08);margin:4px 0"></div>
+        </div>
+        <div style="flex:1;padding:0 0 20px 12px">
+          <div style="font-size:13px;font-weight:700;color:var(--mint);margin-bottom:6px">상품 스펙 표 — 전체 규격 라인업</div>
+          <div style="font-size:12px;color:var(--t3);line-height:1.7">크기 / 중량(g) / 수량 / 코팅 여부 / 소재 정리표 / 교차 구매 유도 (다른 사이즈 링크)</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:0">
+        <div style="width:32px;display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+          <div style="width:24px;height:24px;border-radius:50%;background:var(--ind);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#000">6</div>
+        </div>
+        <div style="flex:1;padding:0 0 0 12px">
+          <div style="font-size:13px;font-weight:700;color:var(--ind);margin-bottom:6px">FAQ + 주의사항</div>
+          <div style="font-size:12px;color:var(--t3);line-height:1.7">자주 묻는 질문 5개 / "전자레인지 가능한가요?" / "기름이 배어 나오나요?" / 반품 최소화에 직결</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 썸네일 이미지 가이드 -->
+  <div class="glass ct" style="padding:22px;margin-bottom:12px">
+    <div style="font-size:14px;font-weight:700;margin-bottom:16px">🖼 썸네일 이미지 제작 가이드</div>
+    <div class="grid g3">
+      <div style="background:rgba(200,241,53,.05);border:1px solid rgba(200,241,53,.15);border-radius:10px;padding:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--lime);margin-bottom:10px">메인 썸네일 (1번)</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.7">
+          · 흰 배경 (#FFFFFF 또는 #F8F8F8)<br>
+          · 상품 10~20장 겹쳐 쌓기<br>
+          · 정면 45도 앵글<br>
+          · 규격·수량 우측 하단 텍스트<br>
+          · 해상도 1000×1000px 이상<br>
+          · "1000매" 숫자 크게 표기
+        </div>
+      </div>
+      <div style="background:rgba(34,217,245,.05);border:1px solid rgba(34,217,245,.15);border-radius:10px;padding:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--cyan);margin-bottom:10px">서브 이미지 (2~4번)</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.7">
+          · 실제 사용 장면 (치킨, 빵, 쟁반)<br>
+          · 규격 비교 이미지 (손 크기 대비)<br>
+          · 식품 접촉면 클로즈업<br>
+          · 여러 사이즈 라인업 한 컷
+        </div>
+      </div>
+      <div style="background:rgba(251,191,36,.05);border:1px solid rgba(251,191,36,.15);border-radius:10px;padding:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--amber);margin-bottom:10px">인포그래픽 이미지 (5~7번)</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.7">
+          · 소재 성분 안전 배지<br>
+          · 규격별 용도 인포그래픽<br>
+          · 기름 흡수 실험 비교 이미지<br>
+          · 경쟁 제품 대비 두께 비교
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ P6 전략 인사이트 ═══ -->
+<section id="p6" class="pane">
+  <div class="sec-h"><div class="sec-tag">Strategic Insights</div><div class="sec-title">전략적 <span class="hl">개선 방향</span></div></div>
+
+  <div class="grid g2" style="margin-bottom:12px">
+    <!-- 단기 전략 -->
+    <div class="glass rt" style="padding:22px">
+      <div style="font-size:14px;font-weight:700;color:var(--rose);margin-bottom:16px">⚡ 즉시 실행 (이번 주 내)</div>
+      <div class="insight ins-r">
+        <div class="ins-title">① 상품명 정리 — 전 상품 적용</div>
+        <div class="ins-body">의류/신발 키워드 즉시 삭제. [페이퍼컷] 브랜드 + 노루지 + 중량 + 규격 + 수량 + 용도 구조로 재작성. 22개 상품 전부.</div>
+      </div>
+      <div class="insight ins-r">
+        <div class="ins-title">② 검색어 40개 풀 등록</div>
+        <div class="ins-body">30g 구형 시리즈 9개 → 40개로 즉시 확장. 치킨포장지·기름종이·배달종이·베이커리포장지 등 업소용 키워드 우선 추가.</div>
+      </div>
+      <div class="insight ins-r">
+        <div class="ins-title">③ 검색옵션 전 상품 입력</div>
+        <div class="ins-body">사이즈·유산지 형태·코팅 여부·내지매수·재질 — 모든 상품에 빠짐없이 입력. 쿠팡 필터 검색에서 노출되려면 필수.</div>
+      </div>
+      <div class="insight ins-r">
+        <div class="ins-title">④ 제조사 필드 누락 4개 보완</div>
+        <div class="ins-body">14926961633·15786274575·14516265049·14516259617 상품 제조사 "페이퍼컷" 입력 완료.</div>
+      </div>
+    </div>
+
+    <!-- 중기 전략 -->
+    <div class="glass at" style="padding:22px">
+      <div style="font-size:14px;font-weight:700;color:var(--amber);margin-bottom:16px">📅 1개월 내 완료</div>
+      <div class="insight ins-a">
+        <div class="ins-title">⑤ 썸네일 이미지 전면 교체</div>
+        <div class="ins-body">흰 배경 + 스택 이미지 + 규격 텍스트 삽입. 올페이퍼 1위 스타일 참고. 클릭률(CTR)에 직접 영향.</div>
+      </div>
+      <div class="insight ins-a">
+        <div class="ins-title">⑥ 상세페이지 인포그래픽 제작</div>
+        <div class="ins-body">규격별 용도 가이드·식품 안전 강조·사용 예시 사진. 현재 경쟁사 대비 상세페이지 품질이 낮으면 전환율 저하.</div>
+      </div>
+      <div class="insight ins-a">
+        <div class="ins-title">⑦ 리뷰 유도 시스템 구축</div>
+        <div class="ins-body">쿠팡 리뷰 작성 안내 카드 동봉. 구매 후 알림 활용. 종이마을 1,934개 · 루머라이 728개 대비 격차 해소가 최우선.</div>
+      </div>
+      <div class="insight ins-a">
+        <div class="ins-title">⑧ 카테고리 통일</div>
+        <div class="ins-body">16165337011 상품을 [80647] 유산지로 변경. 전 상품 동일 카테고리로 집중.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 로켓배송 전략 -->
+  <div class="glass" style="padding:22px;border:1px solid rgba(200,241,53,.25)">
+    <div style="font-size:14px;font-weight:700;color:var(--lime);margin-bottom:16px">🚀 핵심 과제 — 로켓그로스 입점 검토</div>
+    <div class="grid g3">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--t2);margin-bottom:10px">현재 구조적 한계</div>
+        <div style="font-size:12px;color:var(--t3);line-height:1.8">
+          · 상위 10개 중 8개가 로켓배송<br>
+          · 쿠팡 알고리즘 로켓 상품 우선 노출<br>
+          · 구매자 필터: "로켓배송" 선택 시 완전 제외<br>
+          · 일반배송으로 1위 진입은 사실상 불가
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--amber);margin-bottom:10px">로켓그로스 (위탁) 방식</div>
+        <div style="font-size:12px;color:var(--t3);line-height:1.8">
+          · 셀러가 쿠팡 물류센터에 재고 입고<br>
+          · 쿠팡이 배송 처리 (로켓배송 뱃지 부여)<br>
+          · 수수료 발생하지만 노출 대폭 향상<br>
+          · WING → 로켓그로스 신청
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--lime);margin-bottom:10px">예상 효과</div>
+        <div style="font-size:12px;color:var(--t3);line-height:1.8">
+          · 동일 SEO 조건에서 노출 순위 대폭 상승<br>
+          · 로켓배송 필터 구매자 포함<br>
+          · 클릭률·전환율 동시 향상<br>
+          · 경쟁사와 동일 출발선 확보
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>페이퍼컷 × 쿠팡 경쟁사 분석 리포트</strong>
+  <span>2025.05.10 기준 · 쿠팡 "노루지" 검색 결과 분석</span>
+</footer>
+
+</div>
+
+<script>
+function sw(id,btn){document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));document.getElementById(id).classList.add('on');btn.classList.add('on');}
+</script>
+</body>
+</html>

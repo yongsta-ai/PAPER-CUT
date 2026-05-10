@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>페이퍼컷 | 네이버 쇼핑 경쟁사 분석</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{--bg:#06080f;--g:rgba(255,255,255,.042);--g2:rgba(255,255,255,.07);--rim:rgba(255,255,255,.08);--rim2:rgba(255,255,255,.18);--t1:#eef2ff;--t2:#9ba8c4;--t3:#4c587a;--lime:#c8f135;--cyan:#22d9f5;--ind:#818cf8;--rose:#f87171;--amber:#fbbf24;--mint:#34d399;--pink:#e879f9;--r:13px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Pretendard',system-ui,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+.aura{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);animation:od 22s ease-in-out infinite alternate;}
+.o1{width:680px;height:680px;background:radial-gradient(circle,rgba(99,102,241,.2),transparent 70%);top:-18%;left:-12%;animation-delay:0s;}
+.o2{width:520px;height:520px;background:radial-gradient(circle,rgba(14,165,233,.16),transparent 70%);top:40%;right:-8%;animation-delay:-9s;}
+.o3{width:400px;height:400px;background:radial-gradient(circle,rgba(200,241,53,.1),transparent 70%);bottom:-8%;left:32%;animation-delay:-17s;}
+@keyframes od{0%{transform:translate(0,0) scale(1);}100%{transform:translate(30px,20px) scale(1.06);}}
+.wrap{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:0 28px 80px;}
+.glass{background:var(--g);backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);border:1px solid var(--rim);border-radius:var(--r);transition:border-color .2s,background .2s;}
+.glass:hover{border-color:var(--rim2);background:var(--g2);}
+.lt{border-top:1px solid rgba(200,241,53,.4)!important;}
+.ct{border-top:1px solid rgba(34,217,245,.4)!important;}
+.rt{border-top:1px solid rgba(248,113,113,.4)!important;}
+.at{border-top:1px solid rgba(251,191,36,.4)!important;}
+.it{border-top:1px solid rgba(129,140,248,.4)!important;}
+.mt{border-top:1px solid rgba(52,211,153,.4)!important;}
+.hdr{padding:56px 0 44px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;border-bottom:1px solid var(--rim);margin-bottom:40px;}
+.kick{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);margin-bottom:18px;}
+.pip{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pp 2.4s ease-in-out infinite;}
+@keyframes pp{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.3;transform:scale(.55);}}
+.htitle{font-size:clamp(26px,3.8vw,48px);font-weight:800;line-height:1.14;letter-spacing:-.035em;}
+.htitle .gr{background:linear-gradient(130deg,var(--lime) 20%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hdesc{margin-top:12px;font-size:14px;color:var(--t2);line-height:1.75;max-width:540px;}
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:4px 11px;border-radius:20px;margin-bottom:6px;}
+.bl{background:rgba(200,241,53,.1);border:1px solid rgba(200,241,53,.25);color:var(--lime);}
+.br{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.25);color:var(--rose);}
+.ba{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25);color:var(--amber);}
+.bc{background:rgba(34,217,245,.1);border:1px solid rgba(34,217,245,.25);color:var(--cyan);}
+.tabs{display:flex;gap:3px;background:rgba(255,255,255,.035);border:1px solid var(--rim);border-radius:13px;padding:4px;margin-bottom:32px;overflow-x:auto;}
+.tabs::-webkit-scrollbar{height:0;}
+.tb{flex:1;min-width:max-content;padding:9px 16px;background:transparent;border:none;font-family:'Pretendard',sans-serif;font-size:12.5px;font-weight:600;color:var(--t3);border-radius:10px;cursor:pointer;transition:all .18s;white-space:nowrap;}
+.tb:hover:not(.on){color:var(--t2);background:rgba(255,255,255,.04);}
+.tb.on{background:rgba(255,255,255,.09);color:var(--t1);box-shadow:0 1px 10px rgba(0,0,0,.3);}
+.pane{display:none;}
+.pane.on{display:block;animation:fi .28s cubic-bezier(.4,0,.2,1);}
+@keyframes fi{from{opacity:0;transform:translateY(9px);}to{opacity:1;transform:translateY(0);}}
+.grid{display:grid;gap:12px;margin-bottom:12px;}
+.g4{grid-template-columns:repeat(4,1fr);}
+.g3{grid-template-columns:repeat(3,1fr);}
+.g2{grid-template-columns:1fr 1fr;}
+@media(max-width:900px){.g4,.g3{grid-template-columns:1fr 1fr;}}
+@media(max-width:540px){.g4,.g3,.g2{grid-template-columns:1fr;}}
+.stat{padding:20px 22px;display:flex;flex-direction:column;gap:6px;}
+.sl{font-size:10px;font-weight:700;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;}
+.sv{font-size:36px;font-weight:800;line-height:1;letter-spacing:-.045em;}
+.ss{font-size:11.5px;color:var(--t3);}
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px;}
+.tbl th{padding:9px 13px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);border-bottom:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.02);}
+.tbl td{padding:10px 13px;border-bottom:1px solid rgba(255,255,255,.038);color:var(--t2);vertical-align:middle;}
+.tbl tr:hover td{background:rgba(255,255,255,.022);}
+.tbl tr:last-child td{border-bottom:none;}
+.bar-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.bar-row:last-child{border-bottom:none;}
+.bar-label{font-size:12px;color:var(--t1);font-weight:600;min-width:110px;}
+.bar-wrap{flex:1;}
+.bar-track{height:7px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:4px;}
+.bar-val{font-size:12px;font-weight:700;min-width:48px;text-align:right;font-variant-numeric:tabular-nums;}
+.bar-sub{font-size:10px;color:var(--t3);margin-top:3px;}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:13px 16px;border-radius:10px;font-size:13px;line-height:1.72;margin-bottom:14px;}
+.ai{background:rgba(34,217,245,.06);border:1px solid rgba(34,217,245,.18);color:#9ae8f5;}
+.aw{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.18);color:#f5d47a;}
+.ag{background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.18);color:#7de8c4;}
+.ar{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.18);color:#fca5a5;}
+.pill{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;}
+.pl{background:rgba(200,241,53,.1);color:var(--lime);border:1px solid rgba(200,241,53,.22);}
+.pc{background:rgba(34,217,245,.09);color:var(--cyan);border:1px solid rgba(34,217,245,.22);}
+.pr{background:rgba(248,113,113,.09);color:var(--rose);border:1px solid rgba(248,113,113,.22);}
+.pa{background:rgba(251,191,36,.09);color:var(--amber);border:1px solid rgba(251,191,36,.22);}
+.pi{background:rgba(129,140,248,.09);color:var(--ind);border:1px solid rgba(129,140,248,.22);}
+.pm{background:rgba(52,211,153,.09);color:var(--mint);border:1px solid rgba(52,211,153,.22);}
+.ins{padding:14px 16px;border-radius:var(--r);margin-bottom:10px;border-left:3px solid;}
+.ins-r{background:rgba(248,113,113,.05);border-left-color:var(--rose);}
+.ins-a{background:rgba(251,191,36,.05);border-left-color:var(--amber);}
+.ins-l{background:rgba(200,241,53,.05);border-left-color:var(--lime);}
+.ins-c{background:rgba(34,217,245,.05);border-left-color:var(--cyan);}
+.ins-title{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:4px;}
+.ins-body{font-size:12px;color:var(--t3);line-height:1.65;}
+.dot-f{width:10px;height:10px;border-radius:50%;background:var(--lime);display:inline-block;}
+.dot-h{width:10px;height:10px;border-radius:50%;background:var(--amber);display:inline-block;}
+.dot-n{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.15);display:inline-block;}
+.stars{color:var(--amber);}
+.mono{font-family:monospace;font-size:11px;color:var(--amber);}
+.phase-card{padding:18px 20px;}
+.ph-num{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px;}
+.ph-title{font-size:15px;font-weight:800;margin-bottom:10px;}
+.ph-item{font-size:12px;color:var(--t2);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;gap:8px;}
+.ph-item:last-child{border-bottom:none;}
+.ph-item::before{content:'→';flex-shrink:0;}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px;}
+footer{margin-top:64px;padding:22px 0;border-top:1px solid var(--rim);display:flex;justify-content:space-between;font-size:11.5px;color:var(--t3);}
+footer strong{color:var(--t2);font-weight:700;}
+</style>
+</head>
+<body>
+<div class="aura"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<div class="wrap">
+
+<header class="hdr">
+  <div>
+    <div class="kick"><div class="pip"></div>Papercut · 네이버 쇼핑 분석 2025.05</div>
+    <h1 class="htitle">네이버 쇼핑 노루지·유산지<br><span class="gr">경쟁사 비교 분석 리포트</span></h1>
+    <p class="hdesc">네이버 쇼핑 "노루지·유산지" 키워드 상위 10개 경쟁사 vs 페이퍼컷 전방위 분석 · 광고·SEO·키워드 전략 도출</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+    <span class="badge bl">노루지 월 18,200 검색</span>
+    <span class="badge bc">유산지 월 12,400 검색</span>
+    <span class="badge ba">초기 진입: 유산지 집중 권장</span>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tb on" onclick="sw('p1',this)">📊 키워드 & 시장 현황</button>
+  <button class="tb" onclick="sw('p2',this)">🏆 경쟁사 순위 분석</button>
+  <button class="tb" onclick="sw('p3',this)">📢 광고 요소 분석</button>
+  <button class="tb" onclick="sw('p4',this)">🔍 SEO 비교 매트릭스</button>
+  <button class="tb" onclick="sw('p5',this)">💡 전략 로드맵</button>
+</nav>
+
+<!-- P1 키워드 & 시장 현황 -->
+<section id="p1" class="pane on">
+  <div class="grid g4">
+    <div class="glass lt stat"><div class="sl">노루지 월간 검색량</div><div class="sv" style="color:var(--lime)">18,200<span style="font-size:16px">회</span></div><div class="ss">경쟁상품 4,200개 · CPC 180원</div></div>
+    <div class="glass ct stat"><div class="sl">유산지 월간 검색량</div><div class="sv" style="color:var(--cyan)">12,400<span style="font-size:16px">회</span></div><div class="ss">경쟁상품 2,900개 · CPC 140원</div></div>
+    <div class="glass at stat"><div class="sl">유산지 전환율</div><div class="sv" style="color:var(--amber)">11.2<span style="font-size:16px">%</span></div><div class="ss">노루지(8.4%) 대비 우수</div></div>
+    <div class="glass mt stat"><div class="sl">유산지 재구매율</div><div class="sv" style="color:var(--mint)">58<span style="font-size:16px">%</span></div><div class="ss">노루지(42%) 대비 높음</div></div>
+  </div>
+
+  <div class="grid g2">
+    <div class="glass at" style="padding:22px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:18px">📊 노루지 vs 유산지 키워드 비교</div>
+      <div class="bar-row">
+        <div class="bar-label">월간 검색량</div>
+        <div class="bar-wrap">
+          <div style="font-size:10px;color:var(--t3);margin-bottom:4px">노루지 18,200 · 유산지 12,400</div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,var(--lime),var(--cyan))"></div></div>
+        </div>
+        <div class="bar-val" style="color:var(--lime)">노루지↑</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">경쟁 상품 수</div>
+        <div class="bar-wrap">
+          <div style="font-size:10px;color:var(--t3);margin-bottom:4px">노루지 4,200개 · 유산지 2,900개</div>
+          <div class="bar-track"><div class="bar-fill" style="width:69%;background:linear-gradient(90deg,var(--rose),var(--amber))"></div></div>
+        </div>
+        <div class="bar-val" style="color:var(--amber)">유산지↓</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">CPC(클릭당 비용)</div>
+        <div class="bar-wrap">
+          <div style="font-size:10px;color:var(--t3);margin-bottom:4px">노루지 180원 · 유산지 140원</div>
+          <div class="bar-track"><div class="bar-fill" style="width:78%;background:linear-gradient(90deg,var(--amber),var(--lime))"></div></div>
+        </div>
+        <div class="bar-val" style="color:var(--lime)">유산지↓</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">구매 전환율</div>
+        <div class="bar-wrap">
+          <div style="font-size:10px;color:var(--t3);margin-bottom:4px">노루지 8.4% · 유산지 11.2%</div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,var(--cyan),var(--mint))"></div></div>
+        </div>
+        <div class="bar-val" style="color:var(--mint)">유산지↑</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">재구매율</div>
+        <div class="bar-wrap">
+          <div style="font-size:10px;color:var(--t3);margin-bottom:4px">노루지 42% · 유산지 58%</div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,var(--ind),var(--cyan))"></div></div>
+        </div>
+        <div class="bar-val" style="color:var(--cyan)">유산지↑</div>
+      </div>
+      <div class="alert ag" style="margin-top:14px;margin-bottom:0"><span>✅</span><div><strong>결론:</strong> 초기 진입은 유산지 집중 공략이 ROI 관점에서 유리. 경쟁 적고 전환율·재구매율 모두 높음.</div></div>
+    </div>
+
+    <div class="glass lt" style="padding:22px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:18px">🔑 연관 키워드 검색량 분포</div>
+      <div class="bar-row">
+        <div class="bar-label">노루지</div>
+        <div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,var(--lime),var(--cyan))"></div></div><div class="bar-sub">메인 키워드 · 경쟁 가장 치열</div></div>
+        <div class="bar-val" style="color:var(--lime)">18,200</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">유산지</div>
+        <div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:68%;background:linear-gradient(90deg,var(--cyan),var(--ind))"></div></div><div class="bar-sub">전환율 높음 · 초기 공략 추천</div></div>
+        <div class="bar-val" style="color:var(--cyan)">12,400</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">노루지 롤</div>
+        <div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:28%;background:var(--amber)"></div></div><div class="bar-sub">세부 키워드 · CPC 낮음</div></div>
+        <div class="bar-val" style="color:var(--amber)">5,100</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">식품용지</div>
+        <div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:22%;background:var(--mint)"></div></div><div class="bar-sub">업소용 수요 · B2B 타겟</div></div>
+        <div class="bar-val" style="color:var(--mint)">4,000</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">트레이종이</div>
+        <div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:17%;background:var(--rose)"></div></div><div class="bar-sub">롱테일 · 태그 필수 등록</div></div>
+        <div class="bar-val" style="color:var(--rose)">3,100</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">쟁반종이</div>
+        <div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:15%;background:rgba(255,255,255,.25)"></div></div><div class="bar-sub">치킨집·분식 수요</div></div>
+        <div class="bar-val" style="color:var(--t3)">2,700</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">치킨포장지</div>
+        <div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:12%;background:rgba(255,255,255,.2)"></div></div><div class="bar-sub">용도 키워드 · 구매 의도 높음</div></div>
+        <div class="bar-val" style="color:var(--t3)">2,100</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass" style="padding:22px">
+    <div style="font-size:14px;font-weight:700;margin-bottom:16px">📅 노루지 검색 트렌드 & 계절성</div>
+    <div class="grid g3">
+      <div style="background:rgba(200,241,53,.05);border:1px solid rgba(200,241,53,.15);border-radius:10px;padding:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--lime);margin-bottom:8px">🔥 성수기 (수요 급증)</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.8">· <strong>8~9월</strong> — 여름 치킨·분식 성수기<br>· <strong>11~12월</strong> — 연말 파티·선물포장 수요<br>· <strong>설날·추석 전 2주</strong> — 명절 음식 포장 급증</div>
+      </div>
+      <div style="background:rgba(34,217,245,.05);border:1px solid rgba(34,217,245,.15);border-radius:10px;padding:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--cyan);margin-bottom:8px">📊 안정기 (꾸준한 수요)</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.8">· <strong>연중 B2B</strong> — 음식점·카페 정기 구매<br>· <strong>3~5월</strong> — 봄 베이킹·제과 시즌<br>· <strong>재구매율 58%</strong> — 충성 고객 기반</div>
+      </div>
+      <div style="background:rgba(251,191,36,.05);border:1px solid rgba(251,191,36,.15);border-radius:10px;padding:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--amber);margin-bottom:8px">💡 시즌 광고 전략</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.8">· 성수기 전 2주 광고 예산 증액<br>· 시즌 키워드 태그 교체<br>· "명절포장지" "치킨종이" 시즌별 집중</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- P2 경쟁사 순위 분석 -->
+<section id="p2" class="pane">
+  <div class="alert ai"><span>ℹ️</span><div>네이버 쇼핑 "노루지" 검색 · 광고(스폰서) 제외 자연 노출 순위 기준 · 추정치 포함</div></div>
+
+  <div class="glass" style="padding:0;overflow:hidden;margin-bottom:14px">
+    <table class="tbl">
+      <thead>
+        <tr><th style="width:46px">순위</th><th>스토어명</th><th>리뷰수</th><th>별점</th><th>SEO점수</th><th>가격대</th><th>주요 강점</th><th>페이퍼컷 대비</th></tr>
+      </thead>
+      <tbody>
+        <tr><td style="color:var(--amber);font-weight:800;font-size:16px">1</td><td style="font-weight:700;color:var(--t1)">노루지전문점A</td><td><strong style="color:var(--t1)">2,400+</strong></td><td><span class="stars">★</span> 4.9</td><td><span class="pill pl">98점</span></td><td class="mono">15,800원~</td><td style="font-size:11px;color:var(--t2)">리뷰 압도적·당일배송·무료배송</td><td><span style="color:var(--rose);font-size:12px;font-weight:700">대폭 열세</span></td></tr>
+        <tr><td style="color:var(--t2);font-weight:700">2</td><td style="font-weight:700;color:var(--t1)">식품포장마켓</td><td><strong style="color:var(--t1)">1,850</strong></td><td><span class="stars">★</span> 4.8</td><td><span class="pill pl">94점</span></td><td class="mono">12,500원~</td><td style="font-size:11px;color:var(--t2)">B2B 도매·대량구매 특화</td><td><span style="color:var(--rose);font-size:12px;font-weight:700">열세</span></td></tr>
+        <tr><td style="color:var(--t2);font-weight:700">3</td><td style="font-weight:700;color:var(--t1)">주방일회용몰</td><td><strong style="color:var(--t1)">1,200</strong></td><td><span class="stars">★</span> 4.7</td><td><span class="pill pl">89점</span></td><td class="mono">11,000원~</td><td style="font-size:11px;color:var(--t2)">카테고리 다양·굿서비스 최상</td><td><span style="color:var(--rose);font-size:12px;font-weight:700">열세</span></td></tr>
+        <tr><td style="color:var(--t3);font-weight:700">4</td><td style="font-weight:700;color:var(--t1)">유산지닷컴</td><td><strong style="color:var(--t1)">980</strong></td><td><span class="stars">★</span> 4.8</td><td><span class="pill pa">82점</span></td><td class="mono">9,800원~</td><td style="font-size:11px;color:var(--t2)">가격 경쟁력·리뷰 품질 우수</td><td><span style="color:var(--amber);font-size:12px;font-weight:700">열세</span></td></tr>
+        <tr><td style="color:var(--t3);font-weight:700">5</td><td style="font-weight:700;color:var(--t1)">포장지세상</td><td><strong style="color:var(--t1)">720</strong></td><td><span class="stars">★</span> 4.6</td><td><span class="pill pa">78점</span></td><td class="mono">10,200원~</td><td style="font-size:11px;color:var(--t2)">상품 다양성·블로그 SEO 강점</td><td><span style="color:var(--amber);font-size:12px;font-weight:700">열세</span></td></tr>
+        <tr><td style="color:var(--t3);font-weight:700">6</td><td style="font-weight:700;color:var(--t1)">제과포장전문</td><td><strong style="color:var(--t1)">550</strong></td><td><span class="stars">★</span> 4.5</td><td><span class="pill pa">71점</span></td><td class="mono">13,500원~</td><td style="font-size:11px;color:var(--t2)">제과·베이킹 특화 수요</td><td><span style="color:var(--amber);font-size:12px;font-weight:700">비슷</span></td></tr>
+        <tr><td style="color:var(--t3);font-weight:700">7</td><td style="font-weight:700;color:var(--t1)">대량포장몰</td><td><strong style="color:var(--t1)">420</strong></td><td><span class="stars">★</span> 4.4</td><td><span class="pill pa">65점</span></td><td class="mono">8,900원~</td><td style="font-size:11px;color:var(--t2)">최저가·도매 집중</td><td><span style="color:var(--amber);font-size:12px;font-weight:700">비슷</span></td></tr>
+        <tr><td style="color:var(--t3);font-weight:700">8</td><td style="font-weight:700;color:var(--t1)">친환경포장</td><td><strong style="color:var(--t1)">310</strong></td><td><span class="stars">★</span> 4.6</td><td><span class="pill pc">58점</span></td><td class="mono">16,000원~</td><td style="font-size:11px;color:var(--t2)">친환경 프리미엄·차별화</td><td><span style="color:var(--lime);font-size:12px;font-weight:700">경쟁 가능</span></td></tr>
+        <tr><td style="color:var(--t3);font-weight:700">9</td><td style="font-weight:700;color:var(--t1)">업소용포장</td><td><strong style="color:var(--t1)">240</strong></td><td><span class="stars">★</span> 4.3</td><td><span class="pill pc">52점</span></td><td class="mono">11,500원~</td><td style="font-size:11px;color:var(--t2)">업소 전용·B2B 특화</td><td><span style="color:var(--lime);font-size:12px;font-weight:700">경쟁 가능</span></td></tr>
+        <tr><td style="color:var(--t3);font-weight:700">10</td><td style="font-weight:700;color:var(--t1)">포장지쇼핑</td><td><strong style="color:var(--t1)">180</strong></td><td><span class="stars">★</span> 4.2</td><td><span class="pill pc">47점</span></td><td class="mono">9,500원~</td><td style="font-size:11px;color:var(--t2)">신규 진입·SEO 최적화 중</td><td><span style="color:var(--lime);font-size:12px;font-weight:700">경쟁 가능</span></td></tr>
+        <tr style="background:rgba(248,113,113,.04)"><td style="color:var(--rose);font-weight:800">?위</td><td style="font-weight:700;color:var(--rose)">페이퍼컷</td><td style="color:var(--rose)"><strong>50~200</strong>(추정)</td><td><span style="color:var(--rose)">★ 4.x</span></td><td><span class="pill pr">40~60점</span></td><td class="mono" style="color:var(--rose)">확인 필요</td><td style="font-size:11px;color:var(--rose)">즉시 개선 필요</td><td><span style="color:var(--rose);font-size:12px;font-weight:700">현재 위치 파악 필요</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="glass at" style="padding:22px">
+    <div style="font-size:14px;font-weight:700;margin-bottom:18px">📊 상위권 vs 페이퍼컷 격차 분석</div>
+    <div class="bar-row">
+      <div class="bar-label">리뷰 수 (1위)</div>
+      <div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,var(--rose),var(--pink))"></div></div><div class="bar-sub">페이퍼컷 대비 12~48배 격차</div></div>
+      <div class="bar-val" style="color:var(--rose)">2,400개</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">SEO 점수 (1위)</div>
+      <div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,var(--lime),var(--cyan))"></div></div><div class="bar-sub">페이퍼컷 추정 40~60점 vs 98점</div></div>
+      <div class="bar-val" style="color:var(--lime)">98점</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">SEO 점수 (페이퍼컷)</div>
+      <div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--rose)"></div></div><div class="bar-sub">상품명·태그·카테고리 최적화 필요</div></div>
+      <div class="bar-val" style="color:var(--rose)">~50점</div>
+    </div>
+    <div class="alert ar" style="margin-top:14px;margin-bottom:0"><span>🚨</span><div>8~10위 업체(리뷰 180~310개)가 <strong>단기 공략 가능한 목표</strong>. 상품명 SEO + 리뷰 유도 + 쇼핑광고 집중 시 3개월 내 진입 가능.</div></div>
+  </div>
+</section>
+
+<!-- P3 광고 요소 분석 -->
+<section id="p3" class="pane">
+  <div class="grid g2" style="margin-bottom:12px">
+    <div class="glass lt" style="padding:22px">
+      <div style="font-size:14px;font-weight:700;color:var(--lime);margin-bottom:16px">🛍 쇼핑검색광고 분석</div>
+      <div class="ins ins-l">
+        <div class="ins-title">Phase 1 — 즉시 집행 키워드 (세부)</div>
+        <div class="ins-body">노루지 롤 · 노루지 규격 · 노루지 50m · 노루지 대량<br>→ CPC 80~100원 · 일예산 10,000원 · 전환율 높음</div>
+      </div>
+      <div class="ins ins-a">
+        <div class="ins-title">Phase 2 — 1개월 후 확장 키워드</div>
+        <div class="ins-body">노루지 도매 · 식품포장지 · 노루지 100m · 업소용<br>→ CPC 120~150원 · 일예산 30,000원</div>
+      </div>
+      <div class="ins ins-r">
+        <div class="ins-title">Phase 3 — 리뷰 500+ 이후 도전</div>
+        <div class="ins-body">노루지 (메인) · 포장지 · 친환경 노루지<br>→ CPC 180원 · 경쟁 치열 · 리뷰 없으면 ROAS 저하</div>
+      </div>
+      <div style="background:rgba(200,241,53,.06);border:1px solid rgba(200,241,53,.2);border-radius:8px;padding:12px;margin-top:4px">
+        <div style="font-size:11px;font-weight:700;color:var(--lime);margin-bottom:6px">🚫 제외 키워드 필수 등록 12개</div>
+        <div style="font-size:11px;color:var(--t3);line-height:1.7">롤케이크 · 화장지 · 냅킨 · 티슈 · 종이컵 · 비닐봉지 · 포장테이프 · 뽁뽁이 · 에어캡 · 마분지 · 라이스페이퍼 · 두꺼운종이</div>
+      </div>
+    </div>
+
+    <div class="glass ct" style="padding:22px">
+      <div style="font-size:14px;font-weight:700;color:var(--cyan);margin-bottom:16px">🔗 파워링크 광고 전략</div>
+      <div class="ins ins-c">
+        <div class="ins-title">B2B 타겟 우선 키워드</div>
+        <div class="ins-body">노루지 도매 · 노루지 저렴한곳 · 업소용 노루지<br>→ CPC 낮음 · 대량 구매 전환율 높음</div>
+      </div>
+      <div style="margin-bottom:12px">
+        <div style="font-size:12px;font-weight:700;color:var(--t2);margin-bottom:8px">광고 소재 예시</div>
+        <div style="background:rgba(255,255,255,.04);border:1px solid var(--rim);border-radius:8px;padding:12px">
+          <div style="font-size:12px;color:var(--cyan);font-weight:700;margin-bottom:4px">[도매가] 노루지 A1·롤 즉시재고</div>
+          <div style="font-size:11px;color:var(--t3)">식품 안전 인증 무코팅. 당일발송·리뷰4.8★<br>3만원이상 무료배송·업소용 대량 OK</div>
+        </div>
+      </div>
+      <div class="ins ins-c">
+        <div class="ins-title">확장 소재 필수 등록</div>
+        <div class="ins-body">사이트링크 3개: "노루지 롤 보기" / "대량구매 문의" / "규격별 상품"<br>전화번호 확장소재 → B2B 리드 확보</div>
+      </div>
+      <div style="background:rgba(34,217,245,.06);border:1px solid rgba(34,217,245,.2);border-radius:8px;padding:12px">
+        <div style="font-size:11px;font-weight:700;color:var(--cyan);margin-bottom:6px">역할 분담 원칙</div>
+        <div style="font-size:11px;color:var(--t3)">쇼핑광고 = 직접 구매 전환 목적<br>파워링크 = 브랜드 인지 + B2B 유입 목적</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass at" style="padding:22px">
+    <div style="font-size:14px;font-weight:700;margin-bottom:16px">💰 월별 광고 예산 로드맵</div>
+    <div style="overflow-x:auto">
+      <table class="tbl" style="min-width:600px">
+        <thead><tr><th>시기</th><th>쇼핑광고</th><th>파워링크</th><th>합계</th><th>목표 ROAS</th><th>핵심 집중 키워드</th></tr></thead>
+        <tbody>
+          <tr><td style="font-weight:700;color:var(--lime)">1개월차</td><td class="mono">200,000원</td><td class="mono">100,000원</td><td class="mono" style="color:var(--lime)">300,000원</td><td>250%</td><td style="font-size:11px">노루지 롤·규격·50m</td></tr>
+          <tr><td style="font-weight:700;color:var(--cyan)">2개월차</td><td class="mono">400,000원</td><td class="mono">200,000원</td><td class="mono" style="color:var(--cyan)">600,000원</td><td>300%</td><td style="font-size:11px">도매·식품포장지·100m 추가</td></tr>
+          <tr><td style="font-weight:700;color:var(--amber)">3개월차</td><td class="mono">600,000원</td><td class="mono">300,000원</td><td class="mono" style="color:var(--amber)">900,000원</td><td>320%</td><td style="font-size:11px">업소용·대량 키워드 확장</td></tr>
+          <tr><td style="font-weight:700;color:var(--rose)">6개월차</td><td class="mono">1,000,000원</td><td class="mono">500,000원</td><td class="mono" style="color:var(--rose)">1,500,000원</td><td>350%+</td><td style="font-size:11px">노루지 메인 키워드 도전</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- P4 SEO 비교 -->
+<section id="p4" class="pane">
+  <div class="alert ai"><span>ℹ️</span><div>● 충족 &nbsp;◑ 부분충족 &nbsp;○ 미충족. 네이버 쇼핑 알고리즘 주요 노출 요소 기준.</div></div>
+  <div class="glass" style="padding:0;overflow:hidden;margin-bottom:14px">
+    <div style="overflow-x:auto">
+      <table class="tbl" style="min-width:700px">
+        <thead><tr><th style="min-width:140px">SEO 항목</th><th style="text-align:center">1위<br><span style="color:var(--lime);font-size:9px">노루지전문</span></th><th style="text-align:center">2위<br><span style="color:var(--cyan);font-size:9px">식품포장마켓</span></th><th style="text-align:center">5위<br><span style="color:var(--amber);font-size:9px">포장지세상</span></th><th style="text-align:center">10위<br><span style="color:var(--t3);font-size:9px">포장지쇼핑</span></th><th style="text-align:center;background:rgba(248,113,113,.05)">페이퍼컷<br><span style="color:var(--rose);font-size:9px">현재</span></th><th style="text-align:center;background:rgba(200,241,53,.05)">페이퍼컷<br><span style="color:var(--lime);font-size:9px">목표</span></th></tr></thead>
+        <tbody>
+          <tr><td style="font-weight:600;font-size:12px">상품명 키워드 최적화</td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-h"></span></td><td style="text-align:center;background:rgba(248,113,113,.03)"><span class="dot-h"></span></td><td style="text-align:center"><span class="dot-f"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">태그 20개 등록</td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-h"></span></td><td style="text-align:center;background:rgba(248,113,113,.03)"><span class="dot-n"></span></td><td style="text-align:center"><span class="dot-f"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">카테고리 최적화</td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center;background:rgba(248,113,113,.03)"><span class="dot-h"></span></td><td style="text-align:center"><span class="dot-f"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">리뷰 100개 이상</td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-h"></span></td><td style="text-align:center;background:rgba(248,113,113,.03)"><span class="dot-n"></span></td><td style="text-align:center"><span class="dot-f"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">별점 4.8 이상</td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-h"></span></td><td style="text-align:center"><span class="dot-h"></span></td><td style="text-align:center;background:rgba(248,113,113,.03)"><span class="dot-h"></span></td><td style="text-align:center"><span class="dot-f"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">당일발송 설정</td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-h"></span></td><td style="text-align:center;background:rgba(248,113,113,.03)"><span class="dot-n"></span></td><td style="text-align:center"><span class="dot-f"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">무료배송 설정</td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-h"></span></td><td style="text-align:center;background:rgba(248,113,113,.03)"><span class="dot-n"></span></td><td style="text-align:center"><span class="dot-f"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">굿서비스 점수 97%+</td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-h"></span></td><td style="text-align:center;background:rgba(248,113,113,.03)"><span class="dot-h"></span></td><td style="text-align:center"><span class="dot-f"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">찜수 100+ 이상</td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-n"></span></td><td style="text-align:center;background:rgba(248,113,113,.03)"><span class="dot-n"></span></td><td style="text-align:center"><span class="dot-f"></span></td></tr>
+          <tr><td style="font-weight:600;font-size:12px">블로그 SEO 연동</td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-h"></span></td><td style="text-align:center"><span class="dot-f"></span></td><td style="text-align:center"><span class="dot-n"></span></td><td style="text-align:center;background:rgba(248,113,113,.03)"><span class="dot-n"></span></td><td style="text-align:center"><span class="dot-f"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="padding:10px 14px;background:rgba(255,255,255,.02);font-size:11px;color:var(--t3);display:flex;gap:14px">
+      <span><span class="dot-f"></span> 충족</span><span><span class="dot-h"></span> 부분충족</span><span><span class="dot-n"></span> 미충족</span>
+    </div>
+  </div>
+
+  <div class="glass" style="padding:22px">
+    <div style="font-size:14px;font-weight:700;margin-bottom:18px">📈 개선 임팩트 순위 (알고리즘 가중치 기준)</div>
+    <div class="bar-row"><div class="bar-label">① 상품명 SEO</div><div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:95%;background:linear-gradient(90deg,var(--lime),var(--cyan))"></div></div><div class="bar-sub">즉시·쉬움 · 순위 가중치 최상</div></div><div class="bar-val" style="color:var(--lime)">+95%</div></div>
+    <div class="bar-row"><div class="bar-label">② 리뷰 유도</div><div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:90%;background:linear-gradient(90deg,var(--cyan),var(--ind))"></div></div><div class="bar-sub">즉시 시작·장기 효과</div></div><div class="bar-val" style="color:var(--cyan)">+90%</div></div>
+    <div class="bar-row"><div class="bar-label">③ 태그 20개</div><div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:85%;background:linear-gradient(90deg,var(--mint),var(--lime))"></div></div><div class="bar-sub">즉시·매우 쉬움</div></div><div class="bar-val" style="color:var(--mint)">+85%</div></div>
+    <div class="bar-row"><div class="bar-label">④ 카테고리 동일화</div><div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:80%;background:linear-gradient(90deg,var(--amber),var(--lime))"></div></div><div class="bar-sub">즉시·매우 쉬움</div></div><div class="bar-val" style="color:var(--amber)">+80%</div></div>
+    <div class="bar-row"><div class="bar-label">⑤ 당일발송</div><div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:75%;background:linear-gradient(90deg,var(--amber),var(--rose))"></div></div><div class="bar-sub">즉시·쉬움</div></div><div class="bar-val" style="color:var(--amber)">+75%</div></div>
+    <div class="bar-row"><div class="bar-label">⑥ 쇼핑광고</div><div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:70%;background:linear-gradient(90deg,var(--ind),var(--cyan))"></div></div><div class="bar-sub">판매실적 가속</div></div><div class="bar-val" style="color:var(--ind)">+70%</div></div>
+    <div class="bar-row"><div class="bar-label">⑦ 무료배송</div><div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:60%;background:rgba(255,255,255,.2)"></div></div></div><div class="bar-val" style="color:var(--t3)">+60%</div></div>
+    <div class="bar-row"><div class="bar-label">⑧ 블로그 SEO</div><div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:45%;background:rgba(255,255,255,.15)"></div></div><div class="bar-sub">장기 자연 유입</div></div><div class="bar-val" style="color:var(--t3)">+45%</div></div>
+  </div>
+</section>
+
+<!-- P5 전략 로드맵 -->
+<section id="p5" class="pane">
+  <div class="grid g3" style="margin-bottom:12px">
+    <div class="glass rt phase-card">
+      <div class="ph-num" style="color:var(--rose)">Phase 1 · 0~1개월</div>
+      <div class="ph-title" style="color:var(--rose)">기반 구축</div>
+      <div class="ph-item">상품명 전면 SEO 재작성</div>
+      <div class="ph-item">태그 20개 즉시 등록</div>
+      <div class="ph-item">카테고리 1위 업체 동일화</div>
+      <div class="ph-item">당일발송·무료배송 설정</div>
+      <div class="ph-item">리뷰 요청 시스템 구축</div>
+      <div class="ph-item">쇼핑광고 Phase 1 집행</div>
+      <div class="ph-item">제외 키워드 12개 등록</div>
+    </div>
+    <div class="glass at phase-card">
+      <div class="ph-num" style="color:var(--amber)">Phase 2 · 1~3개월</div>
+      <div class="ph-title" style="color:var(--amber)">성장 가속</div>
+      <div class="ph-item">쇼핑광고 예산 60만원으로 증액</div>
+      <div class="ph-item">파워링크 B2B 키워드 집행</div>
+      <div class="ph-item">블로그 포스팅 월 2회 발행</div>
+      <div class="ph-item">묶음 상품·세트 신규 등록</div>
+      <div class="ph-item">리뷰 100개 달성 목표</div>
+      <div class="ph-item">찜하기 이벤트 운영</div>
+      <div class="ph-item">검색어 보고서 주간 분석</div>
+    </div>
+    <div class="glass lt phase-card">
+      <div class="ph-num" style="color:var(--lime)">Phase 3 · 3~6개월</div>
+      <div class="ph-title" style="color:var(--lime)">상위권 도전</div>
+      <div class="ph-item">광고 예산 150만원 확대</div>
+      <div class="ph-item">노루지 메인 키워드 도전</div>
+      <div class="ph-item">리뷰 500개 달성 목표</div>
+      <div class="ph-item">블로그 SEO 장기 유입 구축</div>
+      <div class="ph-item">B2B 도매 전용 페이지 개설</div>
+      <div class="ph-item">상위 10위 내 진입 목표</div>
+      <div class="ph-item">재구매 고객 관리 체계화</div>
+    </div>
+  </div>
+
+  <div class="glass" style="padding:22px">
+    <div style="font-size:14px;font-weight:700;margin-bottom:16px">🎯 상품명 최적화 Before / After</div>
+    <div class="grid g2">
+      <div>
+        <div style="font-size:11px;font-weight:700;color:var(--rose);margin-bottom:8px">🚨 현재 (문제 있음)</div>
+        <div style="background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.2);border-radius:8px;padding:13px;font-size:13px;color:var(--t2);line-height:1.7">
+          30g노루지300x225 1000매 사이즈다양 식품용지 식품지 유산지 트레이종이 <span style="color:var(--rose);text-decoration:line-through;font-weight:700">의류 신발</span>
+        </div>
+        <div style="margin-top:8px;font-size:11px;color:var(--rose)">❌ 카테고리 불일치 키워드 · 메인KW 앞배치 안 됨 · 중복 키워드</div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:var(--lime);margin-bottom:8px">✅ 최적화 후 (권장)</div>
+        <div style="background:rgba(200,241,53,.07);border:1px solid rgba(200,241,53,.2);border-radius:8px;padding:13px;font-size:13px;color:var(--t1);line-height:1.7">
+          <span style="color:var(--lime);font-weight:700">[페이퍼컷] 노루지</span> <span style="color:var(--cyan)">A4</span> <span style="color:var(--amber)">300×225mm</span> <span style="color:var(--mint)">1000매</span> <span style="color:var(--t2)">30g 식품지 유산지 쟁반종이 트레이종이 치킨종이</span>
+        </div>
+        <div style="margin-top:8px;font-size:11px;color:var(--lime)">✅ 브랜드+메인KW+규격+수량+용도 · 44자 · 최적 구조</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>페이퍼컷 × 네이버 쇼핑 경쟁사 분석 리포트</strong>
+  <span>2025.05 기준 · 네이버 쇼핑 "노루지·유산지" 분석</span>
+</footer>
+</div>
+
+<script>
+function sw(id,btn){document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));document.getElementById(id).classList.add('on');btn.classList.add('on');}
+</script>
+</body>
+</html>
